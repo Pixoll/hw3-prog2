@@ -1,11 +1,16 @@
+package backend;
+
 /**
  * El comprador la usa en el expendedor para obtener un producto.
  */
 public abstract class Moneda implements Comparable<Moneda> {
+    private final int valor;
+
     /**
      * El comprador la usa en el expendedor para obtener un producto.
      */
-    public Moneda() {
+    public Moneda(int valor) {
+        this.valor = valor;
     }
 
     /**
@@ -20,7 +25,9 @@ public abstract class Moneda implements Comparable<Moneda> {
      * Obtiene el valor de la moneda.
      * @return El valor de la moneda.
      */
-    public abstract int getValor();
+    public int getValor() {
+        return this.valor;
+    }
 
     @Override
     public int compareTo(Moneda moneda) {

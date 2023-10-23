@@ -1,3 +1,5 @@
+package backend;
+
 /**
  * Tipo de producto que se encuentra en el expendedor.
  */

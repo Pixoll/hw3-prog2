@@ -1,3 +1,5 @@
+import backend.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -44,15 +46,15 @@ class ExpendedorTest {
     void comprarProductoSinMoneda() {
         try {
             this.comprar(TipoProductos.COCA_COLA, null);
-            fail("Se esperaba PagoIncorrectoException");
+            fail("Se esperaba backend.PagoIncorrectoException");
             this.comprar(TipoProductos.FANTA, null);
-            fail("Se esperaba PagoIncorrectoException");
+            fail("Se esperaba backend.PagoIncorrectoException");
             this.comprar(TipoProductos.SPRITE, null);
-            fail("Se esperaba PagoIncorrectoException");
+            fail("Se esperaba backend.PagoIncorrectoException");
             this.comprar(TipoProductos.SNICKERS, null);
-            fail("Se esperaba PagoIncorrectoException");
+            fail("Se esperaba backend.PagoIncorrectoException");
             this.comprar(TipoProductos.SUPER8, null);
-            fail("Se esperaba PagoIncorrectoException");
+            fail("Se esperaba backend.PagoIncorrectoException");
         } catch (Exception ignored) {
         }
     }
@@ -62,14 +64,14 @@ class ExpendedorTest {
     void comprarConInsuficiente() {
         try {
             this.comprar(TipoProductos.COCA_COLA, this.m100);
-            fail("Se esperaba PagoInsuficienteException");
+            fail("Se esperaba backend.PagoInsuficienteException");
             this.comprar(TipoProductos.FANTA, this.m100);
-            fail("Se esperaba PagoInsuficienteException");
+            fail("Se esperaba backend.PagoInsuficienteException");
             this.comprar(TipoProductos.SPRITE, this.m100);
-            fail("Se esperaba PagoInsuficienteException");
+            fail("Se esperaba backend.PagoInsuficienteException");
             this.comprar(TipoProductos.SNICKERS, this.m100);
-            fail("Se esperaba PagoInsuficienteException");
-            // Super 8 se puede comprar con Moneda100, así que no se incluye
+            fail("Se esperaba backend.PagoInsuficienteException");
+            // Super 8 se puede comprar con backend.Moneda100, así que no se incluye
         } catch (Exception ignored) {
         }
     }
@@ -81,15 +83,15 @@ class ExpendedorTest {
 
         try {
             this.comprar(TipoProductos.COCA_COLA, this.m1500);
-            fail("Se esperaba NoHayProductoException");
+            fail("Se esperaba backend.NoHayProductoException");
             this.comprar(TipoProductos.FANTA, this.m1500);
-            fail("Se esperaba NoHayProductoException");
+            fail("Se esperaba backend.NoHayProductoException");
             this.comprar(TipoProductos.SPRITE, this.m1500);
-            fail("Se esperaba NoHayProductoException");
+            fail("Se esperaba backend.NoHayProductoException");
             this.comprar(TipoProductos.SNICKERS, this.m1500);
-            fail("Se esperaba NoHayProductoException");
+            fail("Se esperaba backend.NoHayProductoException");
             this.comprar(TipoProductos.SUPER8, this.m1500);
-            fail("Se esperaba NoHayProductoException");
+            fail("Se esperaba backend.NoHayProductoException");
         } catch (Exception ignored) {
         }
     }
@@ -121,7 +123,7 @@ class ExpendedorTest {
     private int vuelto() {
         int vuelto = 0;
         while (true) {
-            Moneda mVuelto = expendedor.getVuelto();
+            Moneda mVuelto = expendedor.getMonedaVuelto();
             if (mVuelto == null) break;
             assertEquals(100, mVuelto.getValor());
             vuelto += mVuelto.getValor();

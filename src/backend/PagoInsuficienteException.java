@@ -1,3 +1,5 @@
+package backend;
+
 /**
  * Excepción tirada cuando el valor pagado es menor al del producto.
  */

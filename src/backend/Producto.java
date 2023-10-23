@@ -1,3 +1,5 @@
+package backend;
+
 /**
  * Un producto vendido por el expendedor.
  */

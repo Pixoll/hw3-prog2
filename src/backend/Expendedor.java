@@ -1,3 +1,5 @@
+package backend;
+
 /**
  * Máquina expendedora que vende los productos.
  */
@@ -7,15 +9,15 @@ public class Expendedor {
      */
     private final Deposito<Producto> cocaCola;
     /**
-     * Depósito con todas las Sprite.
+     * Depósito con todas las backend.Sprite.
      */
     private final Deposito<Producto> sprite;
     /**
-     * Depósito con todas las Fanta.
+     * Depósito con todas las backend.Fanta.
      */
     private final Deposito<Producto> fanta;
     /**
-     * Depósito con todas los Snickers.
+     * Depósito con todas los backend.Snickers.
      */
     private final Deposito<Producto> snickers;
     /**
@@ -74,7 +76,7 @@ public class Expendedor {
                 : tipo == TipoProductos.SPRITE ? this.sprite
                 : tipo == TipoProductos.SNICKERS ? this.snickers
                 : tipo == TipoProductos.SUPER8 ? this.super8
-                // Nunca pasa, es imposible entregar algo que no sea TipoProductos
+                // Nunca pasa, es imposible entregar algo que no sea backend.TipoProductos
                 : null;
         if (deposito == null) {
             this.monedasVuelto.add(moneda);
@@ -100,7 +102,7 @@ public class Expendedor {
      * Obtiene una moneda del vuelto
      * @return Una moneda del vuelto.
      */
-    public Moneda getVuelto() {
+    public Moneda getMonedaVuelto() {
         return this.monedasVuelto.get();
     }
 }

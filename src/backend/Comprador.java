@@ -1,3 +1,5 @@
+package backend;
+
 /**
  * Quien compra un producto en el expendedor.
  */
@@ -31,7 +33,7 @@ public class Comprador {
         }
 
         while (true) {
-            Moneda vuelto = expendedor.getVuelto();
+            Moneda vuelto = expendedor.getMonedaVuelto();
             if (vuelto == null) break;
             this.vuelto += vuelto.getValor();
         }

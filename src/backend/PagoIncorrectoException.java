@@ -1,3 +1,5 @@
+package backend;
+
 /**
  * Excepción tirada cuando el pago es incorrecto.
  */

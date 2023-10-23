@@ -1,3 +1,5 @@
+package backend;
+
 /**
  * Excepción tirada cuando no hay productos en el depósito.
  */

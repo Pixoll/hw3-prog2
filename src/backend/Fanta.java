@@ -1,16 +1,18 @@
+package backend;
+
 /**
  * Un tipo de bebida.
  */
-public class Sprite extends Bebida {
+public class Fanta extends Bebida {
     /**
      * Un tipo de bebida.
      * @param serie Número identificador del producto.
      */
-    public Sprite(int serie) {
+    public Fanta(int serie) {
         super(serie);
     }
 
     public String beber() {
-        return "sprite";
+        return "fanta";
     }
 }

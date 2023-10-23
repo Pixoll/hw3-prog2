@@ -1,3 +1,5 @@
+import backend.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -101,7 +103,7 @@ public class Main {
      * @param moneda La moneda de pago
      * @return La moneda entregada si no se pudo hacer la compra. En otro caso es null
      */
-    private static Moneda comprarProducto(final TipoProductos tipo, final Moneda moneda) {
+    private static Moneda comprarProducto(TipoProductos tipo, Moneda moneda) {
         try {
             System.out.println("Comprando " + tipo.getTipo() + " ($" + tipo.getPrecio() + ")" + " con " + moneda);
             final Comprador comprador = new Comprador(tipo, moneda, Main.expendedor);
@@ -110,13 +112,13 @@ public class Main {
             System.out.println("Vuelto: $" + comprador.cuantoVuelto());
         } catch (PagoIncorrectoException error) {
             System.out.println("PagoIncorrecto: " + error.getMessage());
-            return Main.expendedor.getVuelto();
+            return Main.expendedor.getMonedaVuelto();
         } catch (PagoInsuficienteException error) {
             System.out.println("PagoInsuficiente: " + error.getMessage());
-            return Main.expendedor.getVuelto();
+            return Main.expendedor.getMonedaVuelto();
         } catch (NoHayProductoException error) {
             System.out.println("NoHayProducto: " + error.getMessage());
-            return Main.expendedor.getVuelto();
+            return Main.expendedor.getMonedaVuelto();
         } catch (Exception error) {
             error.printStackTrace();
         }

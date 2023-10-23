@@ -1,3 +1,8 @@
+import backend.Moneda100;
+import backend.Moneda1000;
+import backend.Moneda1500;
+import backend.Moneda500;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -57,7 +62,7 @@ class MonedaTest {
     }
 
     @Test
-    @DisplayName("Comparar Moneda100 con el resto")
+    @DisplayName("Comparar backend.Moneda100 con el resto")
     void m100CompareTo() {
         assertEquals(0, this.m100.compareTo(this.m100));
         assertTrue(this.m100.compareTo(this.m500) < 0);
@@ -66,7 +71,7 @@ class MonedaTest {
     }
 
     @Test
-    @DisplayName("Comparar Moneda500 con el resto")
+    @DisplayName("Comparar backend.Moneda500 con el resto")
     void m500CompareTo() {
         assertTrue(this.m500.compareTo(this.m100) > 0);
         assertEquals(0, this.m500.compareTo(this.m500));
@@ -75,7 +80,7 @@ class MonedaTest {
     }
 
     @Test
-    @DisplayName("Comparar Moneda1000 con el resto")
+    @DisplayName("Comparar backend.Moneda1000 con el resto")
     void m1000CompareTo() {
         assertTrue(this.m1000.compareTo(this.m100) > 0);
         assertTrue(this.m1000.compareTo(this.m500) > 0);
@@ -84,7 +89,7 @@ class MonedaTest {
     }
 
     @Test
-    @DisplayName("Comparar Moneda1500 con el resto")
+    @DisplayName("Comparar backend.Moneda1500 con el resto")
     void m1500CompareTo() {
         assertTrue(this.m1500.compareTo(this.m100) > 0);
         assertTrue(this.m1500.compareTo(this.m500) > 0);

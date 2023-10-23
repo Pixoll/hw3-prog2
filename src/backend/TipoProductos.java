@@ -1,3 +1,5 @@
+package backend;
+
 /**
  * Constantes asociadas todos los tipos de productos vendidos.
  */
@@ -7,18 +9,18 @@ public enum TipoProductos {
      */
     COCA_COLA("Coca Cola", 1000),
     /**
-     * Representa la bebida Fanta.
+     * Representa la bebida backend.Fanta.
      */
-    FANTA("Fanta", 800),
+    FANTA("backend.Fanta", 800),
     /**
-     * Representa la bebida Sprite.
+     * Representa la bebida backend.Sprite.
      */
-    SPRITE("Sprite", 900),
+    SPRITE("backend.Sprite", 900),
     /**
-     * Representa el dulce Snickers.
+     * Representa el dulce backend.Snickers.
      * "You're not you when you're hungry"
      */
-    SNICKERS("Snickers", 1200),
+    SNICKERS("backend.Snickers", 1200),
     /**
      * Representa el dulce Super 8.
      */
