@@ -27,10 +27,10 @@ public class Comprador {
         expendedor.comprarProducto(tipoProducto, moneda);
         Producto producto = expendedor.getProductoComprado();
 
-        if (producto instanceof Bebida bebida) {
-            this.sabor = bebida.beber();
-        } else if (producto instanceof Dulce dulce) {
-            this.sabor = dulce.comer();
+        if (producto instanceof Bebida) {
+            this.sabor = ((Bebida)producto).beber();
+        } else if (producto instanceof Dulce) {
+            this.sabor = ((Dulce)producto).comer();
         }
 
         while (true) {
