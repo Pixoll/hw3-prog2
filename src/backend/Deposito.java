@@ -20,7 +20,7 @@ public class Deposito<T> {
      * Depósito de items.
      */
     public Deposito() {
-        this.puedeRemover = false;
+        this.puedeRemover = true;
         this.items = new ArrayList<>();
     }
 
