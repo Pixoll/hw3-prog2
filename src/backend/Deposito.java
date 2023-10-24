@@ -8,15 +8,25 @@ import java.util.ArrayList;
  */
 public class Deposito<T> {
     /**
+     * Si se pueden remover items o no.
+     */
+    private final boolean puedeRemover;
+    /**
      * Almacena los items.
      */
-    private final ArrayList<T> almacen;
+    private final ArrayList<T> items;
 
     /**
      * Depósito de items.
      */
     public Deposito() {
-        this.almacen = new ArrayList<>();
+        this.puedeRemover = false;
+        this.items = new ArrayList<>();
+    }
+
+    public Deposito(boolean puedeRemover) {
+        this.puedeRemover = puedeRemover;
+        this.items = new ArrayList<>();
     }
 
     /**
@@ -24,15 +34,23 @@ public class Deposito<T> {
      * @param item Es el item.
      */
     public void add(T item) {
-        this.almacen.add(item);
+        this.items.add(item);
     }
 
     /**
-     * Remueve el primer item almacenado.
-     * @return El item.
+     * Remueve el primer item almacenado. Si puedeRemover falso, no elimina nada y devuelve null.
+     * @return El item. null si está vacío o si puedeRemover es falso.
      */
     public T get() {
-        if (this.almacen.isEmpty()) return null;
-        return this.almacen.remove(0);
+        if (!this.puedeRemover || this.items.isEmpty()) return null;
+        return this.items.remove(0);
+    }
+
+    /**
+     * Devuelve el número de elementos dentro del depósito.
+     * @return El número de elementos dentro del depósito.
+     */
+    public int size() {
+        return this.items.size();
     }
 }

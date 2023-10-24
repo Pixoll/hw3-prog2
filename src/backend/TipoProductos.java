@@ -7,24 +7,49 @@ public enum TipoProductos {
     /**
      * Representa la bebida Coca Cola.
      */
-    COCA_COLA("Coca Cola", 1000),
+    COCA_COLA("Coca Cola", 1000) {
+        @Override
+        public CocaCola crearProducto(int serie) {
+            return new CocaCola(serie);
+        }
+    },
     /**
      * Representa la bebida backend.Fanta.
      */
-    FANTA("backend.Fanta", 800),
+    FANTA("Fanta", 800) {
+        @Override
+        public Fanta crearProducto(int serie) {
+            return new Fanta(serie);
+        }
+    },
     /**
      * Representa la bebida backend.Sprite.
      */
-    SPRITE("backend.Sprite", 900),
+    SPRITE("Sprite", 900) {
+        @Override
+        public Sprite crearProducto(int serie) {
+            return new Sprite(serie);
+        }
+    },
     /**
      * Representa el dulce backend.Snickers.
      * "You're not you when you're hungry"
      */
-    SNICKERS("backend.Snickers", 1200),
+    SNICKERS("Snickers", 1200) {
+        @Override
+        public Snickers crearProducto(int serie) {
+            return new Snickers(serie);
+        }
+    },
     /**
      * Representa el dulce Super 8.
      */
-    SUPER8("Super 8", 100);
+    SUPER8("Super 8", 100) {
+        @Override
+        public Super8 crearProducto(int serie) {
+            return new Super8(serie);
+        }
+    };
 
     /**
      * Texto que representa el tipo del producto.
@@ -65,4 +90,11 @@ public enum TipoProductos {
         if (cardinal < 0 || cardinal > TipoProductos.values().length - 1) return null;
         return TipoProductos.values()[cardinal];
     }
+
+    /**
+     * Crea un producto de este tipo.
+     * @param serie La serie del producto.
+     * @return El producto de este tipo.
+     */
+    public abstract Producto crearProducto(int serie);
 }

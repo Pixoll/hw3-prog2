@@ -1,52 +1,44 @@
 package backend;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  * Máquina expendedora que vende los productos.
  */
 public class Expendedor {
     /**
-     * Depósito con todas las Coca Cola.
+     * Array con los depósitos de todos los tipos posibles de productos
      */
-    private final Deposito<Producto> cocaCola;
-    /**
-     * Depósito con todas las backend.Sprite.
-     */
-    private final Deposito<Producto> sprite;
-    /**
-     * Depósito con todas las backend.Fanta.
-     */
-    private final Deposito<Producto> fanta;
-    /**
-     * Depósito con todas los backend.Snickers.
-     */
-    private final Deposito<Producto> snickers;
-    /**
-     * Depósito con todos los Super 8.
-     */
-    private final Deposito<Producto> super8;
+    private final ArrayList<Deposito<Producto>> productos;
     /**
      * Depósito con todos las monedas del vuelto.
      */
     private final Deposito<Moneda> monedasVuelto;
+    /**
+     * Almacena el producto comprado.
+     */
+    private Producto productoComprado;
+    /**
+     * Depósito con todas las monedas usadas al pagar.
+     */
+    public final Deposito<Moneda> monedasPagadas;
 
     /**
      * Máquina expendedora que vende los productos.
      * @param numeroProductos Número de productos que vende la máquina.
      */
     public Expendedor(int numeroProductos) {
-        this.cocaCola = new Deposito<>();
-        this.fanta = new Deposito<>();
-        this.sprite = new Deposito<>();
-        this.snickers = new Deposito<>();
-        this.super8 = new Deposito<>();
+        this.productos = new ArrayList<>();
         this.monedasVuelto = new Deposito<>();
+        this.monedasPagadas = new Deposito<>(false);
 
-        for (int i = 0; i < numeroProductos; i++) {
-            this.cocaCola.add(new CocaCola(i));
-            this.fanta.add(new Fanta(i));
-            this.sprite.add(new Sprite(i));
-            this.snickers.add(new Snickers(i));
-            this.super8.add(new Super8(i));
+        for (TipoProductos tipo : TipoProductos.values()) {
+            final Deposito<Producto> deposito = new Deposito<>();
+            for (int i = 0; i < numeroProductos; i++) {
+                deposito.add(tipo.crearProducto(i));
+            }
+            this.productos.add(deposito);
         }
     }
 
@@ -54,12 +46,11 @@ public class Expendedor {
      * Compra un producto de la máquina expendedora.
      * @param moneda Pago del producto.
      * @param tipo Tipo del producto a comprar.
-     * @return El producto comprado, si no hubo errores.
      * @throws NoHayProductoException Tirada cuando no hay productos en el depósito.
      * @throws PagoIncorrectoException Tirada cuando el pago es incorrecto (null).
      * @throws PagoInsuficienteException Tirada cuando el valor pagado es menor al del producto.
      */
-    public Producto comprarProducto(TipoProductos tipo, Moneda moneda)
+    public void comprarProducto(TipoProductos tipo, Moneda moneda)
             throws NoHayProductoException, PagoIncorrectoException, PagoInsuficienteException {
         if (moneda == null) {
             throw new PagoIncorrectoException("No ingresaste dinero.");
@@ -71,18 +62,7 @@ public class Expendedor {
                     + " (ingresaste $" + moneda.getValor() + ")");
         }
 
-        Deposito<Producto> deposito = tipo == TipoProductos.COCA_COLA ? this.cocaCola
-                : tipo == TipoProductos.FANTA ? this.fanta
-                : tipo == TipoProductos.SPRITE ? this.sprite
-                : tipo == TipoProductos.SNICKERS ? this.snickers
-                : tipo == TipoProductos.SUPER8 ? this.super8
-                // Nunca pasa, es imposible entregar algo que no sea backend.TipoProductos
-                : null;
-        if (deposito == null) {
-            this.monedasVuelto.add(moneda);
-            throw new NoHayProductoException("El tipo de producto \"" + tipo + "\" no existe");
-        }
-
+        Deposito<Producto> deposito = this.productos.get(tipo.ordinal());
         Producto producto = deposito.get();
         if (producto == null) {
             this.monedasVuelto.add(moneda);
@@ -95,7 +75,16 @@ public class Expendedor {
             vuelto -= 100;
         }
 
-        return producto;
+        this.productoComprado = producto;
+        this.monedasPagadas.add(moneda);
+    }
+
+    /**
+     * Devuelve el producto comprado.
+     * @return El producto comprado, si es que no hubo errores al comprarlo.
+     */
+    public Producto getProductoComprado() {
+        return this.productoComprado;
     }
 
     /**

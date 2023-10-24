@@ -24,7 +24,8 @@ public class Comprador {
      */
     public Comprador(TipoProductos tipoProducto, Moneda moneda, Expendedor expendedor)
             throws NoHayProductoException, PagoIncorrectoException, PagoInsuficienteException {
-        Producto producto = expendedor.comprarProducto(tipoProducto, moneda);
+        expendedor.comprarProducto(tipoProducto, moneda);
+        Producto producto = expendedor.getProductoComprado();
 
         if (producto instanceof Bebida bebida) {
             this.sabor = bebida.beber();
