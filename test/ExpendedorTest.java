@@ -117,7 +117,8 @@ class ExpendedorTest {
 
     private Producto comprar(TipoProductos producto, Moneda pago)
             throws NoHayProductoException, PagoInsuficienteException, PagoIncorrectoException {
-        return expendedor.comprarProducto(producto, pago);
+        expendedor.comprarProducto(producto, pago);
+        return expendedor.getProductoComprado();
     }
 
     private int vuelto() {

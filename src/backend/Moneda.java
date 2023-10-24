@@ -14,11 +14,11 @@ public abstract class Moneda implements Comparable<Moneda> {
     }
 
     /**
-     * Da el puntero de la moneda para saber si dos de estas son diferentes.
-     * @return El puntero.
+     * Serie única para cada moneda creada.
+     * @return Serie de la moneda.
      */
-    public Moneda getSerie() {
-        return this;
+    public String getSerie() {
+        return Integer.toString(this.hashCode(), 16);
     }
 
     /**

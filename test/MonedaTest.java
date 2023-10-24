@@ -33,15 +33,6 @@ class MonedaTest {
     }
 
     @Test
-    @DisplayName("Revisar que .getSerie() es igual a la moneda")
-    void getSerieEqualsSelf() {
-        assertEquals(this.m100, this.m100.getSerie());
-        assertEquals(this.m500, this.m500.getSerie());
-        assertEquals(this.m1000, this.m1000.getSerie());
-        assertEquals(this.m1500, this.m1500.getSerie());
-    }
-
-    @Test
     @DisplayName("Revisar que .getSerie() no es igual a una diferente")
     void getSerieNotEqualsOther() {
         assertNotEquals(this.m100.getSerie(), this.m500.getSerie());
