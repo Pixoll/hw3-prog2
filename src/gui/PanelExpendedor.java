@@ -7,5 +7,6 @@ public class PanelExpendedor extends JPanel {
 
     public PanelExpendedor(PanelPrincipal panelPrincipal) {
         this.panelPrincipal = panelPrincipal;
+        this.setBackground(Util.parseColor("#000000", 0));
     }
 }

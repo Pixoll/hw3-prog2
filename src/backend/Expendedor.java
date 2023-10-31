@@ -88,6 +88,14 @@ public class Expendedor {
     }
 
     /**
+     * Entrega la cantidad de productos del tipo especificado.
+     * @return La cantidad de productos del tipo especificado.
+     */
+    public int getProductoCantidad(TipoProductos tipo) {
+        return this.productos.get(tipo.ordinal()).size();
+    }
+
+    /**
      * Obtiene una moneda del vuelto
      * @return Una moneda del vuelto.
      */

@@ -18,7 +18,7 @@ public class Ventana extends JFrame {
         // Cuando no está maximizado
         this.setSize(1080, 720);
 
-        final PanelPrincipal panel = new PanelPrincipal(this.getWidth(), this.getHeight());
+        final PanelPrincipal panel = new PanelPrincipal();
         this.add(panel, BorderLayout.CENTER);
 
         this.setVisible(true);

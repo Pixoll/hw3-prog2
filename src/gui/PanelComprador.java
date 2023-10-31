@@ -7,5 +7,6 @@ public class PanelComprador extends JPanel {
 
     public PanelComprador(PanelPrincipal panelPrincipal) {
         this.panelPrincipal = panelPrincipal;
+        this.setBackground(Util.parseColor("#000000", 0));
     }
 }
