@@ -6,10 +6,13 @@ import java.awt.*;
 public class PanelPrincipal extends JPanel {
     private final PanelComprador panelComprador;
     private final PanelExpendedor panelExpendedor;
-    private final Image fondo;
+    private final Image imagenFondo;
+    private final Rectangle bordesFondo;
+    private boolean bordesArreglados;
 
-    public PanelPrincipal() {
+    public PanelPrincipal(int width, int height) {
         this.setLayout(null);
+        this.setBounds(0, 0, width, height);
 
         this.panelComprador = new PanelComprador(this);
         this.panelExpendedor = new PanelExpendedor(this);
@@ -17,9 +20,14 @@ public class PanelPrincipal extends JPanel {
         this.add(this.panelComprador);
         this.add(this.panelExpendedor);
 
-        this.fondo = new ImageIcon(Util.getRecursoPath(
-                PanelPrincipal.class, "/images/background.jpg")
-        ).getImage();
+        this.imagenFondo = ImagenRecurso.FONDO.getImagen();
+
+        final float fondoScaling = (float) (this.getHeight()) / this.imagenFondo.getHeight(null);
+        final int fondoWidth = (int) (this.imagenFondo.getWidth(null) * fondoScaling);
+        final int fondoHeight = (int) (this.imagenFondo.getHeight(null) * fondoScaling);
+
+        this.bordesFondo = new Rectangle(fondoWidth, fondoHeight);
+        this.bordesArreglados = false;
     }
 
     public PanelComprador getPanelComprador() {
@@ -30,23 +38,30 @@ public class PanelPrincipal extends JPanel {
         return this.panelExpendedor;
     }
 
+    private void arreglarBordes() {
+        if (this.bordesArreglados) return;
+
+        this.setBounds(0, 0, this.getWidth(), this.getHeight());
+
+        final float fondoScaling = (float) (this.getHeight()) / this.imagenFondo.getHeight(null);
+        this.bordesFondo.width = (int) (this.imagenFondo.getWidth(null) * fondoScaling);
+        this.bordesFondo.height = (int) (this.imagenFondo.getHeight(null) * fondoScaling);
+
+        this.bordesArreglados = true;
+    }
+
     @Override
     public void paint(Graphics graphics) {
+        this.arreglarBordes();
         super.paint(graphics);
 
-        final float fondoScaling = (float) (this.getHeight()) / this.fondo.getHeight(null);
-        final int fondoWidth = (int) (this.fondo.getWidth(null) * fondoScaling);
-        final int fondoHeight = (int) (this.fondo.getHeight(null) * fondoScaling);
         int fondoX = 0;
         while (fondoX < this.getWidth()) {
-            graphics.drawImage(this.fondo, fondoX, 0, fondoWidth, fondoHeight, null);
-            fondoX += fondoWidth;
+            graphics.drawImage(this.imagenFondo, fondoX, 0, this.bordesFondo.width, this.bordesFondo.height, null);
+            fondoX += this.bordesFondo.width;
         }
 
-        this.panelComprador.setBounds(0, 0, this.getWidth(), this.getHeight());
-        this.panelExpendedor.setBounds(0, 0, this.getWidth() / 2, this.getHeight());
-
-        this.panelComprador.repaint();
         this.panelExpendedor.repaint();
+        this.panelComprador.repaint();
     }
 }
