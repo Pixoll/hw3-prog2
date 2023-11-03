@@ -5,19 +5,29 @@ import java.awt.*;
 
 public class PanelExpendedor extends JPanel {
     private final PanelPrincipal panelPrincipal;
+    private final PanelExpendedorNumpad panelNumpad;
     private final Image imagenMaquina;
     private final Rectangle bordes;
+    private final Rectangle numpadBordes;
     private boolean bordesCalculados;
 
     public PanelExpendedor(PanelPrincipal panelPrincipal) {
         this.panelPrincipal = panelPrincipal;
         this.imagenMaquina = ImagenRecurso.MAQUINA.getImagen();
         this.bordes = new Rectangle();
+        this.numpadBordes = new Rectangle();
         this.bordesCalculados = false;
 
         this.setLayout(null);
         this.setBackground(Util.parseColor("#000000", 0));
         this.setBounds(panelPrincipal.getBounds());
+
+        this.panelNumpad = new PanelExpendedorNumpad(this);
+        this.add(panelNumpad);
+    }
+
+    public PanelExpendedorNumpad getPanelNumpad() {
+        return this.panelNumpad;
     }
 
     private void calcularBordes() {
@@ -34,11 +44,20 @@ public class PanelExpendedor extends JPanel {
         this.bordes.y = (panelPrincipalHeight - this.bordes.height) / 2;
         this.bordes.x = panelPrincipalWidth - this.bordes.width - (this.bordes.y * 2);
 
+        this.numpadBordes.x = this.bordes.x + (int) (205 * maquinaScaling);
+        this.numpadBordes.y = this.bordes.y + (int) (206 * maquinaScaling);
+        this.numpadBordes.width = (int) (52 * maquinaScaling);
+        this.numpadBordes.height = (int) (92 * maquinaScaling);
+
         this.bordesCalculados = true;
     }
 
     public Rectangle getBordes() {
         return this.bordes;
+    }
+
+    public Rectangle getNumpadBordes() {
+        return this.numpadBordes;
     }
 
     @Override
@@ -48,5 +67,6 @@ public class PanelExpendedor extends JPanel {
         super.paint(graphics);
 
         graphics.drawImage(this.imagenMaquina, this.bordes.x, this.bordes.y, this.bordes.width, this.bordes.height, null);
+        this.panelNumpad.repaint();
     }
 }

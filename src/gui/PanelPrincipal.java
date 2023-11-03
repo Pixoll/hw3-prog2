@@ -8,7 +8,7 @@ public class PanelPrincipal extends JPanel {
     private final PanelExpendedor panelExpendedor;
     private final Image imagenFondo;
     private final Rectangle bordesFondo;
-    private boolean bordesArreglados;
+    private boolean bordesCalculados;
 
     public PanelPrincipal(int width, int height) {
         this.setLayout(null);
@@ -16,6 +16,7 @@ public class PanelPrincipal extends JPanel {
 
         this.panelComprador = new PanelComprador(this);
         this.panelExpendedor = new PanelExpendedor(this);
+        this.panelExpendedor.getPanelNumpad().setPanelPopupNumpad(this.panelComprador.getPanelPopupNumpad());
 
         this.add(this.panelComprador);
         this.add(this.panelExpendedor);
@@ -27,7 +28,7 @@ public class PanelPrincipal extends JPanel {
         final int fondoHeight = (int) (this.imagenFondo.getHeight(null) * fondoScaling);
 
         this.bordesFondo = new Rectangle(fondoWidth, fondoHeight);
-        this.bordesArreglados = false;
+        this.bordesCalculados = false;
     }
 
     public PanelComprador getPanelComprador() {
@@ -38,21 +39,25 @@ public class PanelPrincipal extends JPanel {
         return this.panelExpendedor;
     }
 
-    private void arreglarBordes() {
-        if (this.bordesArreglados) return;
+    private void calcularBordes() {
+        if (this.bordesCalculados) return;
 
         this.setBounds(0, 0, this.getWidth(), this.getHeight());
 
         final float fondoScaling = (float) (this.getHeight()) / this.imagenFondo.getHeight(null);
         this.bordesFondo.width = (int) (this.imagenFondo.getWidth(null) * fondoScaling);
-        this.bordesFondo.height = (int) (this.imagenFondo.getHeight(null) * fondoScaling);
+        this.bordesFondo.height = this.getHeight();
 
-        this.bordesArreglados = true;
+        this.bordesCalculados = true;
+    }
+
+    public Rectangle getBordesFondo() {
+        return this.bordesFondo;
     }
 
     @Override
     public void paint(Graphics graphics) {
-        this.arreglarBordes();
+        this.calcularBordes();
         super.paint(graphics);
 
         int fondoX = 0;
