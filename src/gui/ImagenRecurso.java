@@ -1,5 +1,7 @@
 package gui;
 
+import backend.TipoProductos;
+
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
@@ -24,19 +26,24 @@ public enum ImagenRecurso {
     MONEDA1500("/images/moneda1500.png"),
     ERROR("/images/error.png");
 
-    private final URL path;
     private final Image imagen;
 
     ImagenRecurso(String path) {
-        this.path = Objects.requireNonNull(ImagenRecurso.class.getResource(path));
-        this.imagen = new ImageIcon(this.path).getImage();
-    }
-
-    public URL getPath() {
-        return this.path;
+        final URL iconPath = Objects.requireNonNull(ImagenRecurso.class.getResource(path));
+        this.imagen = new ImageIcon(iconPath).getImage();
     }
 
     public Image getImagen() {
         return this.imagen;
+    }
+
+    public static Image getImagenProducto(TipoProductos tipo) {
+        return (tipo == TipoProductos.COCA_COLA ? ImagenRecurso.COCACOLA
+                : tipo == TipoProductos.FANTA ? ImagenRecurso.FANTA
+                : tipo == TipoProductos.SPRITE ? ImagenRecurso.SPRITE
+                : tipo == TipoProductos.SNICKERS ? ImagenRecurso.SNICKERS
+                : tipo == TipoProductos.SUPER8 ? ImagenRecurso.SUPER8
+                : ImagenRecurso.ERROR
+        ).getImagen();
     }
 }

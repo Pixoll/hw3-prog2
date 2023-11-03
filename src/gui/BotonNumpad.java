@@ -26,15 +26,7 @@ public class BotonNumpad extends JButton implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        final Image imagenPreview = this.tipo == TipoProductos.COCA_COLA ? ImagenRecurso.COCACOLA.getImagen()
-                : this.tipo == TipoProductos.FANTA ? ImagenRecurso.FANTA.getImagen()
-                : this.tipo == TipoProductos.SPRITE ? ImagenRecurso.SPRITE.getImagen()
-                : this.tipo == TipoProductos.SNICKERS ? ImagenRecurso.SNICKERS.getImagen()
-                : this.tipo == TipoProductos.SUPER8 ? ImagenRecurso.SUPER8.getImagen()
-                : ImagenRecurso.ERROR.getImagen();
-
-        this.panelProductoPreview.setImagenPreview(imagenPreview);
-
+        this.panelProductoPreview.setImagenPreview(ImagenRecurso.getImagenProducto(tipo));
         this.panelProductoPreview.repaint();
     }
 }
