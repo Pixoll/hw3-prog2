@@ -25,7 +25,7 @@ public class PanelExpendedorNumpad extends JPanel implements MouseListener {
         this.numpadAbierto = false;
 
         this.setLayout(null);
-        this.setBackground(Util.parseColor("#000000", 0));
+        this.setBackground(Util.color("#000000", 0));
         this.setBounds(panelExpendedor.getBounds());
 
         this.addMouseListener(this);

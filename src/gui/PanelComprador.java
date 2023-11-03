@@ -17,7 +17,7 @@ public class PanelComprador extends JPanel {
         this.imagenFondo = ImagenRecurso.FONDO.getImagen();
 
         this.setLayout(null);
-        this.setBackground(Util.parseColor("#000000", 0));
+        this.setBackground(Util.color("#000000", 0));
         this.setBounds(panelPrincipal.getBounds());
 
         this.panelPopupNumpad = new PanelPopupNumpad(this);
@@ -38,7 +38,7 @@ public class PanelComprador extends JPanel {
         this.bordes.width = expendedorBordes.x - (this.bordes.x * 2);
         this.bordes.height = expendedorBordes.height;
 
-        this.setBounds(0, 0, this.bordes.width + (this.bordes.x * 2), this.getHeight());
+        this.setBounds(0, 0, this.bordes.width + (this.bordes.x * 2), this.panelPrincipal.getHeight());
 
         this.bordesCalculados = true;
     }

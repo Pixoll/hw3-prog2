@@ -42,8 +42,6 @@ public class PanelPrincipal extends JPanel {
     private void calcularBordes() {
         if (this.bordesCalculados) return;
 
-        this.setBounds(0, 0, this.getWidth(), this.getHeight());
-
         final float fondoScaling = (float) (this.getHeight()) / this.imagenFondo.getHeight(null);
         this.bordesFondo.width = (int) (this.imagenFondo.getWidth(null) * fondoScaling);
         this.bordesFondo.height = this.getHeight();

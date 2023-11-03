@@ -19,7 +19,7 @@ public class PanelExpendedor extends JPanel {
         this.bordesCalculados = false;
 
         this.setLayout(null);
-        this.setBackground(Util.parseColor("#000000", 0));
+        this.setBackground(Util.color("#000000", 0));
         this.setBounds(panelPrincipal.getBounds());
 
         this.panelNumpad = new PanelExpendedorNumpad(this);
@@ -33,8 +33,8 @@ public class PanelExpendedor extends JPanel {
     private void calcularBordes() {
         if (this.bordesCalculados) return;
 
-        final int panelPrincipalWidth = this.panelPrincipal.getBounds().width;
-        final int panelPrincipalHeight = this.panelPrincipal.getBounds().height;
+        final int panelPrincipalWidth = this.panelPrincipal.getWidth();
+        final int panelPrincipalHeight = this.panelPrincipal.getHeight();
         final int maquinaWidth = this.imagenMaquina.getWidth(null);
         final int maquinaHeight = this.imagenMaquina.getHeight(null);
 
