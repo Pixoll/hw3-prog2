@@ -24,6 +24,10 @@ public class PanelComprador extends JPanel {
         this.add(this.panelPopupNumpad);
     }
 
+    public PanelPrincipal getPanelPrincipal() {
+        return this.panelPrincipal;
+    }
+
     public PanelPopupNumpad getPanelPopupNumpad() {
         return this.panelPopupNumpad;
     }

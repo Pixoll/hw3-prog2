@@ -26,6 +26,10 @@ public class PanelExpendedor extends JPanel {
         this.add(panelNumpad);
     }
 
+    public PanelPrincipal getPanelPrincipal() {
+        return this.panelPrincipal;
+    }
+
     public PanelExpendedorNumpad getPanelNumpad() {
         return this.panelNumpad;
     }
