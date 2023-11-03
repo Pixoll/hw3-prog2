@@ -21,7 +21,8 @@ public enum ImagenRecurso {
     MONEDA100("/images/moneda100.png"),
     MONEDA500("/images/moneda500.png"),
     MONEDA1000("/images/moneda1000.png"),
-    MONEDA1500("/images/moneda1500.png");
+    MONEDA1500("/images/moneda1500.png"),
+    ERROR("/images/error.png");
 
     private final URL path;
     private final Image imagen;

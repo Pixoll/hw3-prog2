@@ -8,15 +8,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class BotonNumpad extends JButton implements ActionListener {
-    private final PanelExpendedor panelExpendedor;
-    private final PanelPopupNumpad panelPopupNumpad;
+    private final PanelExpendedorProductoPreview panelProductoPreview;
     private final TipoProductos tipo;
 
-    public BotonNumpad(PanelPopupNumpad panelPopupNumpad, PanelExpendedor panelExpendedor, TipoProductos tipo) {
+    public BotonNumpad(TipoProductos tipo, PanelExpendedorProductoPreview panelProductoPreview) {
         super();
 
-        this.panelPopupNumpad = panelPopupNumpad;
-        this.panelExpendedor = panelExpendedor;
+        this.panelProductoPreview = panelProductoPreview;
         this.tipo = tipo;
 
         this.setOpaque(false);
@@ -28,6 +26,15 @@ public class BotonNumpad extends JButton implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        System.out.println("click " + this.tipo);
+        final Image imagenPreview = this.tipo == TipoProductos.COCA_COLA ? ImagenRecurso.COCACOLA.getImagen()
+                : this.tipo == TipoProductos.FANTA ? ImagenRecurso.FANTA.getImagen()
+                : this.tipo == TipoProductos.SPRITE ? ImagenRecurso.SPRITE.getImagen()
+                : this.tipo == TipoProductos.SNICKERS ? ImagenRecurso.SNICKERS.getImagen()
+                : this.tipo == TipoProductos.SUPER8 ? ImagenRecurso.SUPER8.getImagen()
+                : ImagenRecurso.ERROR.getImagen();
+
+        this.panelProductoPreview.setImagenPreview(imagenPreview);
+
+        this.panelProductoPreview.repaint();
     }
 }

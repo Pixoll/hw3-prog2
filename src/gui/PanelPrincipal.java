@@ -17,6 +17,7 @@ public class PanelPrincipal extends JPanel {
         this.panelComprador = new PanelComprador(this);
         this.panelExpendedor = new PanelExpendedor(this);
         this.panelExpendedor.getPanelNumpad().setPanelPopupNumpad(this.panelComprador.getPanelPopupNumpad());
+        this.panelComprador.getPanelPopupNumpad().setPanelProductoPreview(this.panelExpendedor.getPanelProductoPreview());
 
         this.add(this.panelComprador);
         this.add(this.panelExpendedor);

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class PanelPopupNumpad extends JPanel {
     private final PanelComprador panelComprador;
+    private PanelExpendedorProductoPreview panelProductoPreview;
     private final Image imagenNumpad;
     private final Rectangle bordes;
     private boolean bordesCalculados;
@@ -29,13 +30,10 @@ public class PanelPopupNumpad extends JPanel {
         this.setLayout(null);
         this.setBackground(Util.color("#000000", 0));
         this.setBounds(panelComprador.getBounds());
+    }
 
-        for (int i = 0; i < 12; i++) {
-            final TipoProductos tipo = TipoProductos.valueOf(i);
-            this.botonesProductos.add(new BotonNumpad(
-                    this, panelComprador.getPanelPrincipal().getPanelExpendedor(), tipo
-            ));
-        }
+    public void setPanelProductoPreview(PanelExpendedorProductoPreview panelProductoPreview) {
+        this.panelProductoPreview = panelProductoPreview;
     }
 
     public void toggleNumpadAbierto() {
@@ -64,6 +62,11 @@ public class PanelPopupNumpad extends JPanel {
 
     private void addBotones() {
         if (this.botonesAdded) return;
+
+        for (int i = 0; i < 12; i++) {
+            final TipoProductos tipo = TipoProductos.valueOf(i);
+            this.botonesProductos.add(new BotonNumpad(tipo, this.panelProductoPreview));
+        }
 
         final int totalWidth = this.bordes.width;
         final int botonSize = (int) (totalWidth * (4f / 13));

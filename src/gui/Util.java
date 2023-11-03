@@ -10,4 +10,8 @@ public class Util {
         final int b = Integer.parseInt(hexColor.substring(offset + 4, offset + 6), 16);
         return new Color(r, g, b, alpha);
     }
+
+    public static Color color(String hexColor) {
+        return Util.color(hexColor, 255);
+    }
 }
