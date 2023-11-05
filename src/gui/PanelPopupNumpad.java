@@ -15,6 +15,7 @@ public class PanelPopupNumpad extends JPanel {
     private boolean numpadAbierto;
     private boolean numpadLimpiado;
     private final ArrayList<BotonNumpad> botonesProductos;
+    private BotonConfirmar botonConfirmar;
     private boolean botonesAdded;
 
     public PanelPopupNumpad(PanelComprador panelComprador) {
@@ -25,6 +26,7 @@ public class PanelPopupNumpad extends JPanel {
         this.numpadAbierto = false;
         this.numpadLimpiado = false;
         this.botonesProductos = new ArrayList<>();
+        this.botonConfirmar = null;
         this.botonesAdded = false;
 
         this.setLayout(null);
@@ -68,9 +70,12 @@ public class PanelPopupNumpad extends JPanel {
             this.botonesProductos.add(new BotonNumpad(tipo, this.panelProductoPreview));
         }
 
+        this.botonConfirmar = new BotonConfirmar(this, this.panelProductoPreview);
+
         final int totalWidth = this.bordes.width;
         final int botonSize = (int) (totalWidth * (4f / 13));
         final int botonOffset = (totalWidth - botonSize * 3) / 2;
+
         int i = 0;
         for (BotonNumpad boton : this.botonesProductos) {
             final int x = botonOffset + (i % 3) * botonSize;
@@ -80,6 +85,12 @@ public class PanelPopupNumpad extends JPanel {
             i++;
         }
 
+        this.botonConfirmar.setBounds(
+                botonOffset, this.bordes.height - botonOffset - botonSize,
+                botonSize * 3, botonSize
+        );
+        this.add(this.botonConfirmar);
+
         this.botonesAdded = true;
     }
 
@@ -87,6 +98,7 @@ public class PanelPopupNumpad extends JPanel {
         for (BotonNumpad boton : this.botonesProductos) {
             boton.setEnabled(estado);
         }
+        this.botonConfirmar.setEnabled(estado);
     }
 
     @Override
