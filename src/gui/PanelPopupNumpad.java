@@ -41,8 +41,16 @@ public class PanelPopupNumpad extends JPanel {
         this.panelProductoPreview = panelProductoPreview;
     }
 
+    public PanelExpendedorProductoPreview getPanelProductoPreview() {
+        return this.panelProductoPreview;
+    }
+
     public void setPanelExpendedorNumpad(PanelExpendedorNumpad panelExpendedorNumpad) {
         this.panelExpendedorNumpad = panelExpendedorNumpad;
+    }
+
+    public PanelExpendedorNumpad getPanelExpendedorNumpad() {
+        return this.panelExpendedorNumpad;
     }
 
     public void toggleNumpadAbierto() {
@@ -77,7 +85,7 @@ public class PanelPopupNumpad extends JPanel {
             this.botonesProductos.add(new BotonNumpad(tipo, this.panelProductoPreview));
         }
 
-        this.botonConfirmar = new BotonConfirmar(this, this.panelProductoPreview, this.panelExpendedorNumpad);
+        this.botonConfirmar = new BotonConfirmar(this);
 
         final int totalWidth = this.bordes.width;
         final int botonSize = (int) (totalWidth * (4f / 13));

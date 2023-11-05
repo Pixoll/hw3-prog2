@@ -10,16 +10,12 @@ public class BotonConfirmar extends JButton implements ActionListener {
     private final PanelExpendedorProductoPreview panelProductoPreview;
     private final PanelExpendedorNumpad panelExpendedorNumpad;
 
-    public BotonConfirmar(
-            PanelPopupNumpad panelPopupNumpad,
-            PanelExpendedorProductoPreview panelProductoPreview,
-            PanelExpendedorNumpad panelExpendedorNumpad
-    ) {
+    public BotonConfirmar(PanelPopupNumpad panelPopupNumpad) {
         super();
 
         this.panelPopupNumpad = panelPopupNumpad;
-        this.panelProductoPreview = panelProductoPreview;
-        this.panelExpendedorNumpad = panelExpendedorNumpad;
+        this.panelProductoPreview = panelPopupNumpad.getPanelProductoPreview();
+        this.panelExpendedorNumpad = panelPopupNumpad.getPanelExpendedorNumpad();
 
         this.setOpaque(false);
         this.setBackground(Util.color("#000000", 0));
