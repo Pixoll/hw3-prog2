@@ -35,12 +35,13 @@ public class PanelExpendedorProductoPreview extends JPanel {
         this.setBounds(this.panelExpendedor.getPreviewBordes());
         super.paint(graphics);
 
-        graphics.setColor(this.getBackground());
-        graphics.fillRect(0, 0, this.getWidth(), this.getHeight());
-
         if (this.imagenPreview != null) {
             final Rectangle bordes = this.calcularBordesImagenPreview();
             graphics.drawImage(this.imagenPreview, bordes.x, bordes.y, bordes.width, bordes.height, null);
+            return;
         }
+
+        graphics.setColor(this.getBackground());
+        graphics.fillRect(0, 0, this.getWidth(), this.getHeight());
     }
 }

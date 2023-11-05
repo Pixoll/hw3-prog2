@@ -19,6 +19,7 @@ public class BotonNumpad extends JButton implements ActionListener {
 
         this.setOpaque(false);
         this.setBackground(Util.color("#000000", 0));
+        this.setBorder(null);
         this.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         this.addActionListener(this);
@@ -26,7 +27,7 @@ public class BotonNumpad extends JButton implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        this.panelProductoPreview.setImagenPreview(ImagenRecurso.getImagenProducto(tipo));
+        this.panelProductoPreview.setImagenPreview(ImagenRecurso.getImagenProducto(this.tipo));
         this.panelProductoPreview.repaint();
     }
 }
