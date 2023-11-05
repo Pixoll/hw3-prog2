@@ -35,6 +35,10 @@ public class PanelExpendedorNumpad extends JPanel implements MouseListener {
         this.panelPopupNumpad = panelPopupNumpad;
     }
 
+    public void toggleNumpadAbierto() {
+        this.numpadAbierto = !this.numpadAbierto;
+    }
+
     @Override
     public void paint(Graphics graphics) {
         this.setBounds(this.panelExpendedor.getNumpadBordes());
@@ -52,7 +56,7 @@ public class PanelExpendedorNumpad extends JPanel implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent event) {
-        this.numpadAbierto = !this.numpadAbierto;
+        this.toggleNumpadAbierto();
         this.panelPopupNumpad.toggleNumpadAbierto();
         this.panelPopupNumpad.repaint();
         this.repaint();
