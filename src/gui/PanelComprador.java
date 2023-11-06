@@ -6,6 +6,7 @@ import java.awt.*;
 public class PanelComprador extends JPanel {
     private final PanelPrincipal panelPrincipal;
     private final PanelPopupNumpad panelPopupNumpad;
+    private final PanelPopupInsertarMoneda panelPopupInsertarMoneda;
     private final Rectangle bordes;
     private final Image imagenFondo;
     private boolean bordesCalculados;
@@ -21,7 +22,10 @@ public class PanelComprador extends JPanel {
         this.setBounds(panelPrincipal.getBounds());
 
         this.panelPopupNumpad = new PanelPopupNumpad(this);
+        this.panelPopupInsertarMoneda = new PanelPopupInsertarMoneda(this);
+
         this.add(this.panelPopupNumpad);
+        this.add(this.panelPopupInsertarMoneda);
     }
 
     public PanelPrincipal getPanelPrincipal() {
@@ -30,6 +34,10 @@ public class PanelComprador extends JPanel {
 
     public PanelPopupNumpad getPanelPopupNumpad() {
         return this.panelPopupNumpad;
+    }
+
+    public PanelPopupInsertarMoneda getPanelPopupInsertarMoneda() {
+        return this.panelPopupInsertarMoneda;
     }
 
     private void calcularBordes() {

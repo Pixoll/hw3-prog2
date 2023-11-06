@@ -7,10 +7,12 @@ public class PanelExpendedor extends JPanel {
     private final PanelPrincipal panelPrincipal;
     private final PanelExpendedorNumpad panelNumpad;
     private final PanelExpendedorProductoPreview panelProductoPreview;
+    private final PanelExpendedorInsertarMoneda panelInsertarMoneda;
     private final Image imagenMaquina;
     private final Rectangle bordes;
     private final Rectangle numpadBordes;
     private final Rectangle previewBordes;
+    private final Rectangle insertarMonedaBordes;
     private boolean bordesCalculados;
 
     public PanelExpendedor(PanelPrincipal panelPrincipal) {
@@ -19,6 +21,7 @@ public class PanelExpendedor extends JPanel {
         this.bordes = new Rectangle();
         this.numpadBordes = new Rectangle();
         this.previewBordes = new Rectangle();
+        this.insertarMonedaBordes = new Rectangle();
         this.bordesCalculados = false;
 
         this.setLayout(null);
@@ -27,9 +30,11 @@ public class PanelExpendedor extends JPanel {
 
         this.panelNumpad = new PanelExpendedorNumpad(this);
         this.panelProductoPreview = new PanelExpendedorProductoPreview(this);
+        this.panelInsertarMoneda = new PanelExpendedorInsertarMoneda(this);
 
         this.add(this.panelNumpad);
         this.add(this.panelProductoPreview);
+        this.add(this.panelInsertarMoneda);
     }
 
     public PanelPrincipal getPanelPrincipal() {
@@ -42,6 +47,10 @@ public class PanelExpendedor extends JPanel {
 
     public PanelExpendedorProductoPreview getPanelProductoPreview() {
         return this.panelProductoPreview;
+    }
+
+    public PanelExpendedorInsertarMoneda getPanelInsertarMoneda() {
+        return this.panelInsertarMoneda;
     }
 
     private void calcularBordesPorCoords(Rectangle bordes, float maquinaScaling, int x, int y, int width, int height) {
@@ -67,6 +76,7 @@ public class PanelExpendedor extends JPanel {
 
         this.calcularBordesPorCoords(this.numpadBordes, maquinaScaling, 203, 204, 56, 96);
         this.calcularBordesPorCoords(this.previewBordes, maquinaScaling, 207, 97, 48, 48);
+        this.calcularBordesPorCoords(this.insertarMonedaBordes, maquinaScaling, 205, 156, 52, 40);
 
         this.bordesCalculados = true;
     }
@@ -83,6 +93,10 @@ public class PanelExpendedor extends JPanel {
         return this.previewBordes;
     }
 
+    public Rectangle getInsertarMonedaBordes() {
+        return this.insertarMonedaBordes;
+    }
+
     @Override
     public void paint(Graphics graphics) {
         this.setBounds(this.panelPrincipal.getBounds());
@@ -92,5 +106,6 @@ public class PanelExpendedor extends JPanel {
         graphics.drawImage(this.imagenMaquina, this.bordes.x, this.bordes.y, this.bordes.width, this.bordes.height, null);
         this.panelNumpad.repaint();
         this.panelProductoPreview.repaint();
+        this.panelInsertarMoneda.repaint();
     }
 }

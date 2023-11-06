@@ -18,11 +18,16 @@ public class PanelPrincipal extends JPanel {
         this.panelExpendedor = new PanelExpendedor(this);
 
         final PanelExpendedorNumpad expendedorNumpad = this.panelExpendedor.getPanelNumpad();
+        final PanelExpendedorInsertarMoneda expendedorInsertarMoneda = this.panelExpendedor.getPanelInsertarMoneda();
         final PanelPopupNumpad popupNumpad = this.panelComprador.getPanelPopupNumpad();
+        final PanelPopupInsertarMoneda popupInsertarMoneda = this.panelComprador.getPanelPopupInsertarMoneda();
 
         expendedorNumpad.setPanelPopup(popupNumpad);
         popupNumpad.setPanelProductoPreview(this.panelExpendedor.getPanelProductoPreview());
         popupNumpad.setPanelExpendedorNumpad(expendedorNumpad);
+
+        expendedorInsertarMoneda.setPanelPopup(popupInsertarMoneda);
+        popupInsertarMoneda.setPanelInsertarMoneda(expendedorInsertarMoneda);
 
         this.add(this.panelComprador);
         this.add(this.panelExpendedor);
