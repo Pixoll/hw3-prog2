@@ -28,7 +28,7 @@ public class PanelExpendedor extends JPanel {
         this.panelNumpad = new PanelExpendedorNumpad(this);
         this.panelProductoPreview = new PanelExpendedorProductoPreview(this);
 
-        this.add(panelNumpad);
+        this.add(this.panelNumpad);
         this.add(this.panelProductoPreview);
     }
 

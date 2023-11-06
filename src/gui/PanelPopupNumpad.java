@@ -2,32 +2,23 @@ package gui;
 
 import backend.TipoProductos;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class PanelPopupNumpad extends JPanel {
-    private final PanelComprador panelComprador;
+public class PanelPopupNumpad extends PanelPopup {
     private PanelExpendedorProductoPreview panelProductoPreview;
     private PanelExpendedorNumpad panelExpendedorNumpad;
     private final Image imagenNumpad;
-    private final Rectangle bordes;
-    private boolean bordesCalculados;
-    private boolean numpadAbierto;
-    private boolean numpadLimpiado;
     private final ArrayList<BotonNumpad> botonesProductos;
     private BotonConfirmar botonConfirmar;
     private boolean botonesAdded;
 
     public PanelPopupNumpad(PanelComprador panelComprador) {
-        this.panelComprador = panelComprador;
+        super(panelComprador);
+
         this.panelProductoPreview = null;
         this.panelExpendedorNumpad = null;
         this.imagenNumpad = ImagenRecurso.NUMPAD.getImagen();
-        this.bordes = new Rectangle();
-        this.bordesCalculados = false;
-        this.numpadAbierto = false;
-        this.numpadLimpiado = false;
         this.botonesProductos = new ArrayList<>();
         this.botonConfirmar = null;
         this.botonesAdded = false;
@@ -53,11 +44,8 @@ public class PanelPopupNumpad extends JPanel {
         return this.panelExpendedorNumpad;
     }
 
-    public void toggleNumpadAbierto() {
-        this.numpadAbierto = !this.numpadAbierto;
-    }
-
-    private void calcularBordes() {
+    @Override
+    protected void calcularBordes() {
         if (this.bordesCalculados) return;
 
         final Rectangle compradorBordes = this.panelComprador.getBordes();
@@ -122,15 +110,15 @@ public class PanelPopupNumpad extends JPanel {
         this.addBotones();
         super.paint(graphics);
 
-        if (this.numpadAbierto) {
+        if (this.isAbierto()) {
             graphics.drawImage(this.imagenNumpad, 0, 0, this.bordes.width, this.bordes.height, null);
             this.toggleBotonesProductos(true);
-            this.numpadLimpiado = false;
+            this.popupLimpiado = false;
             return;
         }
 
-        if (!this.numpadLimpiado) {
-            this.numpadLimpiado = true;
+        if (!this.popupLimpiado) {
+            this.popupLimpiado = true;
             this.toggleBotonesProductos(false);
             this.panelComprador.repaint();
         }

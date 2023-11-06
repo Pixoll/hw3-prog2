@@ -27,8 +27,7 @@ public class BotonConfirmar extends JButton implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        this.panelPopupNumpad.toggleNumpadAbierto();
-        this.panelExpendedorNumpad.toggleNumpadAbierto();
+        this.panelPopupNumpad.toggleAbierto();
         this.panelProductoPreview.setImagenPreview(null);
 
         this.panelPopupNumpad.repaint();
