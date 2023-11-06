@@ -20,7 +20,7 @@ public class PanelPrincipal extends JPanel {
         final PanelExpendedorNumpad expendedorNumpad = this.panelExpendedor.getPanelNumpad();
         final PanelPopupNumpad popupNumpad = this.panelComprador.getPanelPopupNumpad();
 
-        expendedorNumpad.setPanelPopupNumpad(popupNumpad);
+        expendedorNumpad.setPanelPopup(popupNumpad);
         popupNumpad.setPanelProductoPreview(this.panelExpendedor.getPanelProductoPreview());
         popupNumpad.setPanelExpendedorNumpad(expendedorNumpad);
 
