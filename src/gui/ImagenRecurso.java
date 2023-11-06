@@ -21,10 +21,10 @@ public enum ImagenRecurso {
     SPRITE("/images/sprite.png", TipoProductos.SPRITE),
     SNICKERS("/images/snickers.png", TipoProductos.SNICKERS),
     SUPER8("/images/super8.png", TipoProductos.SUPER8),
-    MONEDA100("/images/moneda100.png", new Moneda100()),
-    MONEDA500("/images/moneda500.png", new Moneda500()),
-    MONEDA1000("/images/moneda1000.png", new Moneda1000()),
-    MONEDA1500("/images/moneda1500.png", new Moneda1500()),
+    MONEDA100("/images/moneda100.gif", new Moneda100()),
+    MONEDA500("/images/moneda500.gif", new Moneda500()),
+    MONEDA1000("/images/moneda1000.gif", new Moneda1000()),
+    MONEDA1500("/images/moneda1500.gif", new Moneda1500()),
     ERROR("/images/error.png");
 
     private final Image imagen;
