@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class PanelPopupNumpad extends PanelPopup {
     private PanelExpendedorProductoPreview panelProductoPreview;
-    private PanelExpendedorNumpad panelExpendedorNumpad;
     private final Image imagenNumpad;
     private final ArrayList<BotonNumpad> botonesProductos;
     private BotonConfirmar botonConfirmar;
@@ -17,7 +16,6 @@ public class PanelPopupNumpad extends PanelPopup {
         super(panelComprador);
 
         this.panelProductoPreview = null;
-        this.panelExpendedorNumpad = null;
         this.imagenNumpad = ImagenRecurso.NUMPAD.getImagen();
         this.botonesProductos = new ArrayList<>();
         this.botonConfirmar = null;
@@ -34,14 +32,6 @@ public class PanelPopupNumpad extends PanelPopup {
 
     public PanelExpendedorProductoPreview getPanelProductoPreview() {
         return this.panelProductoPreview;
-    }
-
-    public void setPanelExpendedorNumpad(PanelExpendedorNumpad panelExpendedorNumpad) {
-        this.panelExpendedorNumpad = panelExpendedorNumpad;
-    }
-
-    public PanelExpendedorNumpad getPanelExpendedorNumpad() {
-        return this.panelExpendedorNumpad;
     }
 
     @Override

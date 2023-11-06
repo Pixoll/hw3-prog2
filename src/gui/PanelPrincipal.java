@@ -24,10 +24,10 @@ public class PanelPrincipal extends JPanel {
 
         expendedorNumpad.setPanelPopup(popupNumpad);
         popupNumpad.setPanelProductoPreview(this.panelExpendedor.getPanelProductoPreview());
-        popupNumpad.setPanelExpendedorNumpad(expendedorNumpad);
+        popupNumpad.setPanelExpendedorSeleccionable(expendedorNumpad);
 
         expendedorInsertarMoneda.setPanelPopup(popupInsertarMoneda);
-        popupInsertarMoneda.setPanelInsertarMoneda(expendedorInsertarMoneda);
+        popupInsertarMoneda.setPanelExpendedorSeleccionable(expendedorInsertarMoneda);
 
         this.add(this.panelComprador);
         this.add(this.panelExpendedor);

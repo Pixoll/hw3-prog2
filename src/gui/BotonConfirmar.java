@@ -8,14 +8,14 @@ import java.awt.event.ActionListener;
 public class BotonConfirmar extends JButton implements ActionListener {
     private final PanelPopupNumpad panelPopupNumpad;
     private final PanelExpendedorProductoPreview panelProductoPreview;
-    private final PanelExpendedorNumpad panelExpendedorNumpad;
+    private final PanelExpendedorSeleccionable panelExpendedorNumpad;
 
     public BotonConfirmar(PanelPopupNumpad panelPopupNumpad) {
         super();
 
         this.panelPopupNumpad = panelPopupNumpad;
         this.panelProductoPreview = panelPopupNumpad.getPanelProductoPreview();
-        this.panelExpendedorNumpad = panelPopupNumpad.getPanelExpendedorNumpad();
+        this.panelExpendedorNumpad = panelPopupNumpad.getPanelExpendedorSeleccionable();
 
         this.setOpaque(false);
         this.setBackground(Util.color("#000000", 0));

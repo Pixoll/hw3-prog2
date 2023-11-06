@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 import java.util.function.Function;
 
 public class PanelExpendedorSeleccionable extends JPanel implements MouseListener {
+    protected final PanelComprador panelComprador;
     protected final PanelExpendedor panelExpendedor;
     private PanelPopup panelPopup;
     private final Function<PanelExpendedor, Rectangle> calculadorBorde;
@@ -25,6 +26,7 @@ public class PanelExpendedorSeleccionable extends JPanel implements MouseListene
             ImagenRecurso imagenPanelSeleccionadoBorde
     ) {
         this.panelExpendedor = panelExpendedor;
+        this.panelComprador = panelExpendedor.getPanelPrincipal().getPanelComprador();
         this.panelPopup = null;
         this.calculadorBorde = calculadorBorde;
         this.imagenPanel = imagenPanel.getImagen();
@@ -61,6 +63,13 @@ public class PanelExpendedorSeleccionable extends JPanel implements MouseListene
 
     @Override
     public void mousePressed(MouseEvent event) {
+        for (PanelPopup panelPopup : this.panelComprador.getPanelesPopup()) {
+            if (panelPopup.isAbierto() && panelPopup != this.panelPopup) {
+                panelPopup.toggleAbierto();
+                panelPopup.repaint();
+                panelPopup.getPanelExpendedorSeleccionable().repaint();
+            }
+        }
         this.panelPopup.toggleAbierto();
         this.panelPopup.repaint();
         this.repaint();

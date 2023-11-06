@@ -10,13 +10,10 @@ import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
 public class PanelPopupInsertarMoneda extends PanelPopup implements ImageObserver {
-    private PanelExpendedorInsertarMoneda panelExpendedorInsertarMoneda;
     private final ArrayList<PanelMoneda> panelesMoneda;
 
     public PanelPopupInsertarMoneda(PanelComprador panelComprador) {
         super(panelComprador);
-
-        this.panelExpendedorInsertarMoneda = null;
 
         this.panelesMoneda = new ArrayList<>();
         this.panelesMoneda.add(new PanelMoneda(Moneda100.class, ImagenRecurso.MONEDA100));
@@ -33,10 +30,6 @@ public class PanelPopupInsertarMoneda extends PanelPopup implements ImageObserve
         for (PanelMoneda panelMoneda : this.panelesMoneda) {
             panelMoneda.renovarMoneda();
         }
-    }
-
-    public void setPanelInsertarMoneda(PanelExpendedorInsertarMoneda panelExpendedorInsertarMoneda) {
-        this.panelExpendedorInsertarMoneda = panelExpendedorInsertarMoneda;
     }
 
     @Override

@@ -2,11 +2,13 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class PanelComprador extends JPanel {
     private final PanelPrincipal panelPrincipal;
     private final PanelPopupNumpad panelPopupNumpad;
     private final PanelPopupInsertarMoneda panelPopupInsertarMoneda;
+    private final ArrayList<PanelPopup> panelesPopup;
     private final Rectangle bordes;
     private final Image imagenFondo;
     private boolean bordesCalculados;
@@ -21,11 +23,14 @@ public class PanelComprador extends JPanel {
         this.setBackground(Util.color("#000000", 0));
         this.setBounds(panelPrincipal.getBounds());
 
+        this.panelesPopup = new ArrayList<>();
         this.panelPopupNumpad = new PanelPopupNumpad(this);
         this.panelPopupInsertarMoneda = new PanelPopupInsertarMoneda(this);
 
         this.add(this.panelPopupNumpad);
         this.add(this.panelPopupInsertarMoneda);
+        this.panelesPopup.add(this.panelPopupNumpad);
+        this.panelesPopup.add(this.panelPopupInsertarMoneda);
     }
 
     public PanelPrincipal getPanelPrincipal() {
@@ -38,6 +43,10 @@ public class PanelComprador extends JPanel {
 
     public PanelPopupInsertarMoneda getPanelPopupInsertarMoneda() {
         return this.panelPopupInsertarMoneda;
+    }
+
+    public ArrayList<PanelPopup> getPanelesPopup() {
+        return this.panelesPopup;
     }
 
     private void calcularBordes() {
