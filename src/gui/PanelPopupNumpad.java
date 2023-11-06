@@ -88,7 +88,7 @@ public class PanelPopupNumpad extends JPanel {
         this.botonConfirmar = new BotonConfirmar(this);
 
         final int totalWidth = this.bordes.width;
-        final int botonSize = (int) (totalWidth * (4f / 13));
+        final int botonSize = (int) (totalWidth * (2f / 7));
         final int botonOffset = (totalWidth - botonSize * 3) / 2;
 
         int i = 0;

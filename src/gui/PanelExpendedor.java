@@ -44,6 +44,13 @@ public class PanelExpendedor extends JPanel {
         return this.panelProductoPreview;
     }
 
+    private void calcularBordesPorCoords(Rectangle bordes, float maquinaScaling, int x, int y, int width, int height) {
+        bordes.x = this.bordes.x + (int) (x * maquinaScaling);
+        bordes.y = this.bordes.y + (int) (y * maquinaScaling);
+        bordes.width = (int) (width * maquinaScaling);
+        bordes.height = (int) (height * maquinaScaling);
+    }
+
     private void calcularBordes() {
         if (this.bordesCalculados) return;
 
@@ -58,15 +65,8 @@ public class PanelExpendedor extends JPanel {
         this.bordes.y = (panelPrincipalHeight - this.bordes.height) / 2;
         this.bordes.x = panelPrincipalWidth - this.bordes.width - (this.bordes.y * 2);
 
-        this.numpadBordes.x = this.bordes.x + (int) (205 * maquinaScaling);
-        this.numpadBordes.y = this.bordes.y + (int) (206 * maquinaScaling);
-        this.numpadBordes.width = (int) (52 * maquinaScaling);
-        this.numpadBordes.height = (int) (92 * maquinaScaling);
-
-        this.previewBordes.x = this.bordes.x + (int) (207 * maquinaScaling);
-        this.previewBordes.y = this.bordes.y + (int) (97 * maquinaScaling);
-        this.previewBordes.width = (int) (48 * maquinaScaling);
-        this.previewBordes.height = (int) (48 * maquinaScaling);
+        this.calcularBordesPorCoords(this.numpadBordes, maquinaScaling, 203, 204, 56, 96);
+        this.calcularBordesPorCoords(this.previewBordes, maquinaScaling, 207, 97, 48, 48);
 
         this.bordesCalculados = true;
     }
