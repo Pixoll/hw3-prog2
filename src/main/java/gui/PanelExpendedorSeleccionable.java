@@ -51,14 +51,12 @@ public class PanelExpendedorSeleccionable extends JPanel implements MouseListene
         this.setBounds(this.calculadorBorde.apply(this.panelExpendedor));
         super.paint(graphics);
 
-        final Rectangle bordes = this.getBounds();
         final Image numpad = this.panelPopup.isAbierto() && this.mouseEnPanel ? this.imagenPanelSeleccionadoBorde
                 : this.panelPopup.isAbierto() ? this.imagenPanelSeleccionado
                 : this.mouseEnPanel ? this.imagenPanelBorde
                 : this.imagenPanel;
 
-        graphics.clearRect(0, 0, bordes.width, bordes.height);
-        graphics.drawImage(numpad, 0, 0, bordes.width, bordes.height, null);
+        Util.drawImage(graphics, numpad, this.getBounds().getSize());
     }
 
     @Override

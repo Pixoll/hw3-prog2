@@ -71,7 +71,8 @@ public class PanelPrincipal extends JPanel {
 
         int fondoX = 0;
         while (fondoX < this.getWidth()) {
-            graphics.drawImage(this.imagenFondo, fondoX, 0, this.bordesFondo.width, this.bordesFondo.height, null);
+            final Rectangle bordesImagen = new Rectangle(fondoX, 0, this.bordesFondo.width, this.bordesFondo.height);
+            Util.drawImage(graphics, this.imagenFondo, bordesImagen);
             fondoX += this.bordesFondo.width;
         }
 

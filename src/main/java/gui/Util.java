@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.*;
+import java.awt.image.ImageObserver;
 
 public class Util {
     public static Color color(String hexColor, int alpha) {
@@ -25,5 +26,22 @@ public class Util {
 
             funcion.run();
         }).start();
+    }
+
+    public static void drawImage(Graphics graphics, Image imagen, Rectangle bordes, ImageObserver observer) {
+        graphics.drawImage(imagen, bordes.x, bordes.y, bordes.width, bordes.height, observer);
+    }
+
+    public static void drawImage(Graphics graphics, Image imagen, Rectangle bordes) {
+        Util.drawImage(graphics, imagen, bordes, null);
+    }
+
+    public static void drawImage(Graphics graphics, Image imagen, Dimension size) {
+        graphics.drawImage(imagen, 0, 0, size.width, size.height, null);
+    }
+
+    public static void fillRect(Graphics graphics, Dimension size, Color color) {
+        graphics.setColor(color);
+        graphics.fillRect(0, 0, size.width, size.height);
     }
 }

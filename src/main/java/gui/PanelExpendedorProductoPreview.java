@@ -41,7 +41,6 @@ public class PanelExpendedorProductoPreview extends JPanel {
             return;
         }
 
-        graphics.setColor(this.getBackground());
-        graphics.fillRect(0, 0, this.getWidth(), this.getHeight());
+        Util.fillRect(graphics, this.getSize(), this.getBackground());
     }
 }

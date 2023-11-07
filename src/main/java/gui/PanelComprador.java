@@ -73,10 +73,11 @@ public class PanelComprador extends JPanel {
         this.calcularBordes();
         super.paint(graphics);
 
-        final Rectangle bordesFondo = this.panelPrincipal.getBordesFondo();
+        final Rectangle bordesFondo = new Rectangle(this.panelPrincipal.getBordesFondo().getSize());
         int fondoX = 0;
         while (fondoX < this.getWidth()) {
-            graphics.drawImage(this.imagenFondo, fondoX, 0, bordesFondo.width, bordesFondo.height, null);
+            bordesFondo.x = fondoX;
+            Util.drawImage(graphics, this.imagenFondo, bordesFondo);
             fondoX += bordesFondo.width;
         }
     }

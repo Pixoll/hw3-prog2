@@ -103,7 +103,7 @@ public class PanelExpendedor extends JPanel {
         this.calcularBordes();
         super.paint(graphics);
 
-        graphics.drawImage(this.imagenMaquina, this.bordes.x, this.bordes.y, this.bordes.width, this.bordes.height, null);
+        Util.drawImage(graphics, this.imagenMaquina, this.bordes);
         this.panelNumpad.repaint();
         this.panelProductoPreview.repaint();
         this.panelInsertarMoneda.repaint();

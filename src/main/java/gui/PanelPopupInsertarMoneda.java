@@ -65,12 +65,7 @@ public class PanelPopupInsertarMoneda extends PanelPopup {
 
         if (this.isAbierto()) {
             for (PanelMoneda panelMoneda : this.panelesMoneda) {
-                final Rectangle monedaBordes = panelMoneda.getBordes();
-                graphics.drawImage(
-                        panelMoneda.getImagen(),
-                        monedaBordes.x, monedaBordes.y, monedaBordes.width, monedaBordes.height,
-                        this
-                );
+                Util.drawImage(graphics, panelMoneda.getImagen(), panelMoneda.getBordes(), this);
             }
             this.popupLimpiado = false;
             return;

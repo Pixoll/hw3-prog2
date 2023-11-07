@@ -101,7 +101,7 @@ public class PanelPopupNumpad extends PanelPopup {
         super.paint(graphics);
 
         if (this.isAbierto()) {
-            graphics.drawImage(this.imagenNumpad, 0, 0, this.bordes.width, this.bordes.height, null);
+            Util.drawImage(graphics, this.imagenNumpad, this.getSize());
             this.toggleBotonesProductos(true);
             this.popupLimpiado = false;
             return;
