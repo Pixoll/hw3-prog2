@@ -6,10 +6,9 @@ import backend.Moneda1500;
 import backend.Moneda500;
 
 import java.awt.*;
-import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
-public class PanelPopupInsertarMoneda extends PanelPopup implements ImageObserver {
+public class PanelPopupInsertarMoneda extends PanelPopup {
     private final ArrayList<PanelMoneda> panelesMoneda;
 
     public PanelPopupInsertarMoneda(PanelComprador panelComprador) {

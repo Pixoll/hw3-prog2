@@ -63,16 +63,21 @@ public class PanelExpendedorSeleccionable extends JPanel implements MouseListene
 
     @Override
     public void mousePressed(MouseEvent event) {
+        boolean isSwap = false;
         for (PanelPopup panelPopup : this.panelComprador.getPanelesPopup()) {
             if (panelPopup.isAbierto() && panelPopup != this.panelPopup) {
                 panelPopup.toggleAbierto();
                 panelPopup.repaint();
                 panelPopup.getPanelExpendedorSeleccionable().repaint();
+                isSwap = true;
             }
         }
-        this.panelPopup.toggleAbierto();
-        this.panelPopup.repaint();
-        this.repaint();
+
+        Util.setTimeout(() -> {
+            this.panelPopup.toggleAbierto();
+            this.panelPopup.repaint();
+            this.repaint();
+        }, isSwap ? 100 : 0);
     }
 
     @Override

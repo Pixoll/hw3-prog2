@@ -14,4 +14,16 @@ public class Util {
     public static Color color(String hexColor) {
         return Util.color(hexColor, 255);
     }
+
+    public static void setTimeout(Runnable funcion, long delay) {
+        new Thread(() -> {
+            try {
+                Thread.sleep(delay);
+            } catch (Exception error) {
+                error.printStackTrace();
+            }
+
+            funcion.run();
+        }).start();
+    }
 }
