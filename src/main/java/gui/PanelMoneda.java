@@ -6,13 +6,13 @@ import java.awt.*;
 
 public class PanelMoneda {
     private final Class<? extends Moneda> claseMoneda;
-    private Moneda moneda;
-    private final Image imagen;
+    private final ImagenRecurso imagenRecurso;
     private final Rectangle bordes;
+    private Moneda moneda;
 
     public PanelMoneda(Class<? extends Moneda> claseMoneda, ImagenRecurso imagenRecurso) {
         this.claseMoneda = claseMoneda;
-        this.imagen = imagenRecurso.getImagen();
+        this.imagenRecurso = imagenRecurso;
         this.bordes = new Rectangle();
         this.renovarMoneda();
     }
@@ -29,7 +29,11 @@ public class PanelMoneda {
     }
 
     public Image getImagen() {
-        return this.imagen;
+        return this.imagenRecurso.getImagen();
+    }
+
+    public void recargarImagen() {
+        this.imagenRecurso.recargar();
     }
 
     public void setBordes(int x, int y, int width, int height) {

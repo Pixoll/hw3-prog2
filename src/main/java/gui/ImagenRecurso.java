@@ -31,13 +31,14 @@ public enum ImagenRecurso {
     MONEDA1500("/images/moneda1500.gif", new Moneda1500()),
     ERROR("/images/error.png");
 
-    private final Image imagen;
+    private final URL path;
+    private Image imagen;
     private TipoProductos tipoProducto;
     private Moneda moneda;
 
     ImagenRecurso(String path) {
-        final URL iconPath = Objects.requireNonNull(ImagenRecurso.class.getResource(path));
-        this.imagen = new ImageIcon(iconPath).getImage();
+        this.path = Objects.requireNonNull(ImagenRecurso.class.getResource(path));
+        this.imagen = new ImageIcon(this.path).getImage();
         this.tipoProducto = null;
         this.moneda = null;
     }
@@ -50,10 +51,6 @@ public enum ImagenRecurso {
     ImagenRecurso(String path, Moneda moneda) {
         this(path);
         this.moneda = moneda;
-    }
-
-    public Image getImagen() {
-        return this.imagen;
     }
 
     public static Image getImagenProducto(TipoProductos tipo) {
@@ -72,5 +69,14 @@ public enum ImagenRecurso {
                 .map(ImagenRecurso::getImagen)
                 .findFirst()
                 .orElse(null);
+    }
+
+    public Image getImagen() {
+        return this.imagen;
+    }
+
+    public void recargar() {
+        this.imagen.flush();
+        this.imagen = new ImageIcon(this.path).getImage();
     }
 }

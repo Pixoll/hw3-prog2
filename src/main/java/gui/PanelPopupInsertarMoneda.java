@@ -67,6 +67,7 @@ public class PanelPopupInsertarMoneda extends PanelPopup {
             for (PanelMoneda panelMoneda : this.panelesMoneda) {
                 Util.drawImage(graphics, panelMoneda.getImagen(), panelMoneda.getBordes(), this);
             }
+
             this.popupLimpiado = false;
             return;
         }
@@ -79,7 +80,12 @@ public class PanelPopupInsertarMoneda extends PanelPopup {
 
     @Override
     public boolean imageUpdate(Image img, int infoflags, int x, int y, int w, int h) {
-        if (this.popupLimpiado) return true;
+        if (this.popupLimpiado) {
+            // Causa mensaje "INTERRUPTED while loading Image"
+            this.panelesMoneda.forEach(PanelMoneda::recargarImagen);
+            return true;
+        }
+
         return super.imageUpdate(img, infoflags, x, y, w, h);
     }
 }
