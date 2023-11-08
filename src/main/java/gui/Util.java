@@ -40,6 +40,11 @@ public class Util {
         graphics.drawImage(imagen, 0, 0, size.width, size.height, null);
     }
 
+    public static void fillRect(Graphics graphics, Rectangle bordes, Color color) {
+        graphics.setColor(color);
+        graphics.fillRect(bordes.x, bordes.y, bordes.width, bordes.height);
+    }
+
     public static void fillRect(Graphics graphics, Dimension size, Color color) {
         graphics.setColor(color);
         graphics.fillRect(0, 0, size.width, size.height);

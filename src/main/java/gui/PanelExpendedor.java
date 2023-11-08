@@ -1,5 +1,7 @@
 package gui;
 
+import backend.Expendedor;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,12 +10,15 @@ public class PanelExpendedor extends JPanel {
     private final PanelExpendedorNumpad panelNumpad;
     private final PanelExpendedorProductoPreview panelProductoPreview;
     private final PanelExpendedorInsertarMoneda panelInsertarMoneda;
+    private final PanelVentanaProductos panelVentanaProductos;
     private final Image imagenMaquina;
     private final Rectangle bordes;
     private final Rectangle numpadBordes;
     private final Rectangle previewBordes;
     private final Rectangle insertarMonedaBordes;
+    private final Rectangle ventanaProductosBordes;
     private boolean bordesCalculados;
+    private final Expendedor expendedorProductos;
 
     public PanelExpendedor(PanelPrincipal panelPrincipal) {
         this.panelPrincipal = panelPrincipal;
@@ -22,7 +27,9 @@ public class PanelExpendedor extends JPanel {
         this.numpadBordes = new Rectangle();
         this.previewBordes = new Rectangle();
         this.insertarMonedaBordes = new Rectangle();
+        this.ventanaProductosBordes = new Rectangle();
         this.bordesCalculados = false;
+        this.expendedorProductos = new Expendedor(5);
 
         this.setLayout(null);
         this.setBackground(Util.color("#000000", 0));
@@ -31,10 +38,16 @@ public class PanelExpendedor extends JPanel {
         this.panelNumpad = new PanelExpendedorNumpad(this);
         this.panelProductoPreview = new PanelExpendedorProductoPreview(this);
         this.panelInsertarMoneda = new PanelExpendedorInsertarMoneda(this);
+        this.panelVentanaProductos = new PanelVentanaProductos(this);
 
         this.add(this.panelNumpad);
         this.add(this.panelProductoPreview);
         this.add(this.panelInsertarMoneda);
+        this.add(this.panelVentanaProductos);
+    }
+
+    public Expendedor getExpendedorProductos() {
+        return this.expendedorProductos;
     }
 
     public PanelPrincipal getPanelPrincipal() {
@@ -77,6 +90,7 @@ public class PanelExpendedor extends JPanel {
         this.calcularBordesPorCoords(this.numpadBordes, maquinaScaling, 203, 204, 56, 96);
         this.calcularBordesPorCoords(this.previewBordes, maquinaScaling, 207, 97, 48, 48);
         this.calcularBordesPorCoords(this.insertarMonedaBordes, maquinaScaling, 205, 156, 52, 40);
+        this.calcularBordesPorCoords(this.ventanaProductosBordes, maquinaScaling, 37, 23, 154, 323);
 
         this.bordesCalculados = true;
     }
@@ -97,6 +111,10 @@ public class PanelExpendedor extends JPanel {
         return this.insertarMonedaBordes;
     }
 
+    public Rectangle getVentanaProductosBordes() {
+        return this.ventanaProductosBordes;
+    }
+
     @Override
     public void paint(Graphics graphics) {
         this.setBounds(this.panelPrincipal.getBounds());
@@ -107,5 +125,6 @@ public class PanelExpendedor extends JPanel {
         this.panelNumpad.repaint();
         this.panelProductoPreview.repaint();
         this.panelInsertarMoneda.repaint();
+        this.panelVentanaProductos.repaint();
     }
 }
