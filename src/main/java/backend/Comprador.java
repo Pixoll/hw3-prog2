@@ -1,17 +1,19 @@
 package backend;
 
+import java.util.ArrayList;
+
 /**
  * Quien compra un producto en el expendedor.
  */
 public class Comprador {
     /**
-     * Lo que sabe el producto.
+     * El producto comprado.
      */
-    private String sabor;
+    private final Producto productoComprado;
     /**
-     * Lo que se devuelve si se paga un valor mayor a lo comprado.
+     * Monedas obtenidas del vuelto.
      */
-    private int vuelto;
+    private final ArrayList<Moneda> monedasVuelto;
 
     /**
      * Quien compra un producto en el expendedor.
@@ -25,34 +27,29 @@ public class Comprador {
     public Comprador(TipoProductos tipoProducto, Moneda moneda, Expendedor expendedor)
             throws NoHayProductoException, PagoIncorrectoException, PagoInsuficienteException {
         expendedor.comprarProducto(tipoProducto, moneda);
-        Producto producto = expendedor.getProductoComprado();
-
-        if (producto instanceof Bebida) {
-            this.sabor = ((Bebida)producto).beber();
-        } else if (producto instanceof Dulce) {
-            this.sabor = ((Dulce)producto).comer();
-        }
+        this.productoComprado = expendedor.getProductoComprado();
+        this.monedasVuelto = new ArrayList<>();
 
         while (true) {
             Moneda vuelto = expendedor.getMonedaVuelto();
             if (vuelto == null) break;
-            this.vuelto += vuelto.getValor();
+            this.monedasVuelto.add(vuelto);
         }
-    }
-
-    /**
-     * Cuanto recibe el comprador de vuelto.
-     * @return El vuelto.
-     */
-    public int cuantoVuelto() {
-        return this.vuelto;
     }
 
     /**
      * El sabor de lo que compró.
      * @return El sabor del producto.
      */
-    public String queCompraste() {
-        return this.sabor;
+    public Producto getProductoComprado() {
+        return this.productoComprado;
+    }
+
+    /**
+     * Devuelve las monedas del vuelto.
+     * @return Las monedas del vuelto.
+     */
+    public ArrayList<Moneda> getMonedasVuelto() {
+        return this.monedasVuelto;
     }
 }

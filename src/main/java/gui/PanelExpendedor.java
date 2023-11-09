@@ -1,6 +1,6 @@
 package gui;
 
-import backend.Expendedor;
+import backend.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -50,8 +50,8 @@ public class PanelExpendedor extends JPanel {
         return this.expendedorProductos;
     }
 
-    public PanelPrincipal getPanelPrincipal() {
-        return this.panelPrincipal;
+    public PanelComprador getPanelComprador() {
+        return this.panelPrincipal.getPanelComprador();
     }
 
     public PanelExpendedorNumpad getPanelNumpad() {
@@ -64,6 +64,16 @@ public class PanelExpendedor extends JPanel {
 
     public PanelExpendedorInsertarMoneda getPanelInsertarMoneda() {
         return this.panelInsertarMoneda;
+    }
+
+    public void comprarProducto(TipoProductos tipo, Moneda moneda) {
+        try {
+            final Comprador comprador = new Comprador(tipo, moneda, this.expendedorProductos);
+            System.out.println("Compraste: " + comprador.getProductoComprado().getClass().getName());
+            System.out.println("Vuelto: $" + (100 * comprador.getMonedasVuelto().size()));
+        } catch (Exception error) {
+            System.out.println(error.toString());
+        }
     }
 
     private void calcularBordesPorCoords(Rectangle bordes, float maquinaScaling, int x, int y, int width, int height) {

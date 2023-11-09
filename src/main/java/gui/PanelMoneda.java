@@ -9,12 +9,14 @@ public class PanelMoneda {
     private final ImagenRecurso imagenRecurso;
     private final Rectangle bordes;
     private Moneda moneda;
+    private boolean seleccionado;
 
-    public PanelMoneda(Class<? extends Moneda> claseMoneda, ImagenRecurso imagenRecurso) {
+    public PanelMoneda(Class<? extends Moneda> claseMoneda) {
         this.claseMoneda = claseMoneda;
-        this.imagenRecurso = imagenRecurso;
         this.bordes = new Rectangle();
         this.renovarMoneda();
+        this.imagenRecurso = ImagenRecurso.getImagenMoneda(this.moneda);
+        this.seleccionado = false;
     }
 
     public Moneda getMoneda() {
@@ -32,10 +34,6 @@ public class PanelMoneda {
         return this.imagenRecurso.getImagen();
     }
 
-    public void recargarImagen() {
-        this.imagenRecurso.recargar();
-    }
-
     public void setBordes(int x, int y, int width, int height) {
         this.bordes.x = x;
         this.bordes.y = y;
@@ -45,5 +43,13 @@ public class PanelMoneda {
 
     public Rectangle getBordes() {
         return this.bordes;
+    }
+
+    public boolean isSeleccionado() {
+        return this.seleccionado;
+    }
+
+    public void setSeleccionado(boolean seleccionado) {
+        this.seleccionado = seleccionado;
     }
 }

@@ -11,6 +11,7 @@ public class PanelPopupNumpad extends PanelPopup {
     private final ArrayList<BotonNumpad> botonesProductos;
     private BotonConfirmar botonConfirmar;
     private boolean botonesAdded;
+    private TipoProductos tipoSeleccionado;
 
     public PanelPopupNumpad(PanelComprador panelComprador) {
         super(panelComprador);
@@ -20,6 +21,7 @@ public class PanelPopupNumpad extends PanelPopup {
         this.botonesProductos = new ArrayList<>();
         this.botonConfirmar = null;
         this.botonesAdded = false;
+        this.tipoSeleccionado = null;
 
         this.setLayout(null);
         this.setBackground(Util.color("#000000", 0));
@@ -30,8 +32,12 @@ public class PanelPopupNumpad extends PanelPopup {
         this.panelProductoPreview = panelProductoPreview;
     }
 
-    public PanelExpendedorProductoPreview getPanelProductoPreview() {
-        return this.panelProductoPreview;
+    public TipoProductos getTipoSeleccionado() {
+        return this.tipoSeleccionado;
+    }
+
+    public void setTipoSeleccionado(TipoProductos tipoSeleccionado) {
+        this.tipoSeleccionado = tipoSeleccionado;
     }
 
     @Override
@@ -60,10 +66,10 @@ public class PanelPopupNumpad extends PanelPopup {
 
         for (int i = 0; i < 12; i++) {
             final TipoProductos tipo = TipoProductos.valueOf(i);
-            this.botonesProductos.add(new BotonNumpad(tipo, this.panelProductoPreview));
+            this.botonesProductos.add(new BotonNumpad(tipo, this, this.panelProductoPreview));
         }
 
-        this.botonConfirmar = new BotonConfirmar(this);
+        this.botonConfirmar = new BotonConfirmar(this.panelComprador);
 
         final int totalWidth = this.bordes.width;
         final int botonSize = (int) (totalWidth * (2f / 7));

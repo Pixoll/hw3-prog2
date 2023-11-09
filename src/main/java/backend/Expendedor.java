@@ -55,6 +55,11 @@ public class Expendedor {
         if (moneda == null) {
             throw new PagoIncorrectoException("No ingresaste dinero.");
         }
+
+        if (tipo == null) {
+            throw new NoHayProductoException("No existe el producto null");
+        }
+
         if (moneda.getValor() < tipo.getPrecio()) {
             this.monedasVuelto.add(moneda);
             throw new PagoInsuficienteException("Debes ingresar al menos $"

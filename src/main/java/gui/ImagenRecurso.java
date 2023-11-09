@@ -29,7 +29,8 @@ public enum ImagenRecurso {
     MONEDA500("/images/moneda500.gif", new Moneda500()),
     MONEDA1000("/images/moneda1000.gif", new Moneda1000()),
     MONEDA1500("/images/moneda1500.gif", new Moneda1500()),
-    ERROR("/images/error.png");
+    ERROR("/images/error.png"),
+    FLECHA_ARRIBA("/images/arrow.png");
 
     private final URL path;
     private Image imagen;
@@ -62,21 +63,17 @@ public enum ImagenRecurso {
                 .orElse(null);
     }
 
-    public static Image getImageMoneda(Moneda moneda) {
-        if (moneda == null) return ImagenRecurso.ERROR.getImagen();
+    public static ImagenRecurso getImagenMoneda(Moneda moneda) {
+        if (moneda == null) return ImagenRecurso.ERROR;
         return Arrays.stream(ImagenRecurso.values())
-                .filter(imagenRecurso -> imagenRecurso.moneda.getValor() == moneda.getValor())
-                .map(ImagenRecurso::getImagen)
+                .filter(imagenRecurso ->
+                        imagenRecurso.moneda != null && imagenRecurso.moneda.getValor() == moneda.getValor()
+                )
                 .findFirst()
                 .orElse(null);
     }
 
     public Image getImagen() {
         return this.imagen;
-    }
-
-    public void recargar() {
-        this.imagen.flush();
-        this.imagen = new ImageIcon(this.path).getImage();
     }
 }
