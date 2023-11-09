@@ -26,7 +26,7 @@ public class PanelExpendedorSeleccionable extends JPanel implements MouseListene
             ImagenRecurso imagenPanelSeleccionadoBorde
     ) {
         this.panelExpendedor = panelExpendedor;
-        this.panelComprador = panelExpendedor.getPanelPrincipal().getPanelComprador();
+        this.panelComprador = panelExpendedor.getPanelComprador();
         this.panelPopup = null;
         this.calculadorBorde = calculadorBorde;
         this.imagenPanel = imagenPanel.getImagen();
@@ -75,7 +75,7 @@ public class PanelExpendedorSeleccionable extends JPanel implements MouseListene
             this.panelPopup.toggleAbierto();
             this.panelPopup.repaint();
             this.repaint();
-        }, isSwap ? 100 : 0);
+        }, isSwap ? 10 : 0);
     }
 
     @Override

@@ -33,8 +33,8 @@ public class PanelComprador extends JPanel {
         this.panelesPopup.add(this.panelPopupInsertarMoneda);
     }
 
-    public PanelPrincipal getPanelPrincipal() {
-        return this.panelPrincipal;
+    public PanelExpendedor getPanelExpendedor() {
+        return this.panelPrincipal.getPanelExpendedor();
     }
 
     public PanelPopupNumpad getPanelPopupNumpad() {
