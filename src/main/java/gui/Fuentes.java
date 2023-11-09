@@ -18,7 +18,7 @@ public enum Fuentes {
         }
     }
 
-    public Font getFuente() {
-        return this.fuente;
+    public Font getFuente(float size) {
+        return this.fuente.deriveFont(size);
     }
 }

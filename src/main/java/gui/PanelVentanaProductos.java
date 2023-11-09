@@ -50,7 +50,7 @@ public class PanelVentanaProductos extends JPanel {
 
         final int productoHeight = (int) (this.sizeDeposito.height * 0.8);
         final int sizeFuente = this.sizeSoporte.height * 2;
-        final Font fuente = Fuentes.PIXELOID_SANS.getFuente().deriveFont((float) (sizeFuente * 0.9)); // new Font("Monospaced", Font.PLAIN, sizeFuente);
+        final Font fuente = Fuentes.PIXELOID_SANS.getFuente(sizeFuente * 0.9f);
 
         int y = 0;
         for (PanelTexto panelPrecio : this.preciosProductos) {
