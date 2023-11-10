@@ -29,7 +29,7 @@ public class PanelExpendedor extends JPanel {
         this.insertarMonedaBordes = new Rectangle();
         this.ventanaProductosBordes = new Rectangle();
         this.bordesCalculados = false;
-        this.expendedorProductos = new Expendedor(5);
+        this.expendedorProductos = new Expendedor(7);
 
         this.setLayout(null);
         this.setBackground(Util.color("#000000", 0));
@@ -71,6 +71,8 @@ public class PanelExpendedor extends JPanel {
             final Comprador comprador = new Comprador(tipo, moneda, this.expendedorProductos);
             System.out.println("Compraste: " + comprador.getProductoComprado().getClass().getName());
             System.out.println("Vuelto: $" + (100 * comprador.getMonedasVuelto().size()));
+            this.panelVentanaProductos.actualizarProductos();
+            this.panelVentanaProductos.repaint();
         } catch (Exception error) {
             System.out.println(error.toString());
         }

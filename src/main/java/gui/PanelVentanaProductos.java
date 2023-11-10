@@ -1,6 +1,8 @@
 package gui;
 
+import backend.Deposito;
 import backend.Expendedor;
+import backend.Producto;
 import backend.TipoProductos;
 
 import javax.swing.*;
@@ -13,7 +15,10 @@ public class PanelVentanaProductos extends JPanel {
     private final Dimension sizeDeposito;
     private final Dimension sizeSoporte;
     private final ArrayList<PanelTexto> preciosProductos;
+    private final ArrayList<ImagenConLabel> imagenesProductos;
     private boolean bordesCalculados;
+    private boolean addedProductos;
+    private boolean productosActualizados;
 
     public PanelVentanaProductos(PanelExpendedor panelExpendedor) {
         this.panelExpendedor = panelExpendedor;
@@ -21,17 +26,30 @@ public class PanelVentanaProductos extends JPanel {
         this.sizeDeposito = new Dimension();
         this.sizeSoporte = new Dimension();
         this.preciosProductos = new ArrayList<>();
+        this.imagenesProductos = new ArrayList<>();
         this.bordesCalculados = false;
+        this.addedProductos = false;
+        this.productosActualizados = true;
 
         this.setLayout(null);
         this.setBackground(Util.color("#ffffff"));
         this.setBounds(panelExpendedor.getBounds());
 
         for (TipoProductos tipoProducto : TipoProductos.values()) {
-            final String precio = " $" + tipoProducto.getPrecio();
+            final String precio = " $" + tipoProducto.getPrecio() + " ";
             final PanelTexto panelPrecio = new PanelTexto(precio, "#ffffff", "#333333");
             this.preciosProductos.add(panelPrecio);
             this.add(panelPrecio);
+        }
+    }
+
+    public void actualizarProductos() {
+        this.productosActualizados = false;
+        final int cantidad = this.imagenesProductos.size();
+        for (int i = cantidad - 1; i >= 0; i--) {
+            final ImagenConLabel imagenProducto = this.imagenesProductos.get(i);
+            this.remove(imagenProducto);
+            this.imagenesProductos.remove(imagenProducto);
         }
     }
 
@@ -50,16 +68,18 @@ public class PanelVentanaProductos extends JPanel {
 
         final int productoHeight = (int) (this.sizeDeposito.height * 0.8);
         final int sizeFuente = this.sizeSoporte.height * 2;
-        final Font fuente = Fuentes.PIXELOID_SANS.getFuente(sizeFuente * 0.9f);
+        final Font fuente = Fuentes.PIXELOID_SANS.getFuente(sizeFuente);
 
         int y = 0;
         for (PanelTexto panelPrecio : this.preciosProductos) {
-            final int widthPrecio = (panelPrecio.getText().length() - 2) * sizeFuente;
-            final int precioX = (this.sizeDeposito.width - widthPrecio) / 2;
-            final int precioY = y + productoHeight - (this.sizeSoporte.height * 2);
-
-            panelPrecio.setBounds(precioX, precioY, widthPrecio, sizeFuente);
             panelPrecio.setFont(fuente);
+
+            final Dimension panelPrecioSize = panelPrecio.getPreferredSize();
+            panelPrecio.setSize(panelPrecioSize);
+
+            final int precioX = (this.sizeDeposito.width - panelPrecioSize.width) / 2;
+            final int precioY = y + productoHeight - panelPrecioSize.height + 1;
+            panelPrecio.setLocation(precioX, precioY);
 
             y += this.sizeDeposito.height;
         }
@@ -67,34 +87,72 @@ public class PanelVentanaProductos extends JPanel {
         this.bordesCalculados = true;
     }
 
-    @Override
-    public void paint(Graphics graphics) {
-        this.calcularBordes();
-        super.paint(graphics);
+    private void addProductos() {
+        if (this.addedProductos && this.productosActualizados) return;
 
         int y = 0;
         for (TipoProductos tipo : TipoProductos.values()) {
-            final int cantidad = this.expendedorProductos.getProductoCantidad(tipo);
-            final Image imagenProducto = ImagenRecurso.getImagenProducto(tipo);
+            final Deposito<Producto> productos = this.expendedorProductos.getDepositoProducto(tipo);
+            final int cantidad = productos.size();
+            final ImagenRecurso imagenProducto = ImagenRecurso.getImagenProducto(tipo);
 
             // Productos del dispensador
-            final float imagenScaling = (float) (this.sizeDeposito.height) / imagenProducto.getHeight(null) * 0.8f;
-            final int productoWidth = (int) (imagenProducto.getWidth(null) * imagenScaling);
             final int productoHeight = (int) (this.sizeDeposito.height * 0.8);
+            final float imagenScaling = (float) (productoHeight) / imagenProducto.getHeight();
+            final int productoWidth = (int) (imagenProducto.getWidth() * imagenScaling);
             final Rectangle bordesImagen = new Rectangle(0, y, productoWidth, productoHeight);
             final int productoOffset = (int) (productoWidth * 0.75);
 
-            int cantidadADibujar = 0;
+            final Font serieFuente = Fuentes.PIXELOID_SANS.getFuente(productoHeight * 0.15f);
+
+            int cantidadACrear = 0;
             for (int i = 0; i < cantidad; i++) {
                 if (bordesImagen.x > this.sizeDeposito.width) break;
                 bordesImagen.x += productoOffset;
-                cantidadADibujar++;
+                cantidadACrear++;
             }
 
-            for (int i = 0; i < cantidadADibujar; i++) {
+            for (int i = 0; i < cantidadACrear; i++) {
                 bordesImagen.x -= productoOffset;
-                Util.drawImage(graphics, imagenProducto, bordesImagen);
+                final String serie = Integer.toString(productos.leer(cantidadACrear - i - 1).getSerie());
+
+                final ImagenConLabel imagenProductoConSerie = new ImagenConLabel(imagenProducto);
+                imagenProductoConSerie.setBounds(bordesImagen);
+
+                boolean intersectaConPrecio = false;
+                for (PanelTexto panelPrecio : this.preciosProductos) {
+                    if (panelPrecio.getBounds().intersects(bordesImagen)) {
+                        intersectaConPrecio = true;
+                        break;
+                    }
+                }
+
+                if (!intersectaConPrecio) {
+                    imagenProductoConSerie.setColoresTexto("#ffffff", "#333333");
+                    imagenProductoConSerie.setTextoFuente(serieFuente);
+                    imagenProductoConSerie.setTexto(serie);
+                }
+
+                this.imagenesProductos.add(imagenProductoConSerie);
+                this.add(imagenProductoConSerie);
             }
+
+            y += this.sizeDeposito.height;
+        }
+
+        this.addedProductos = true;
+        this.productosActualizados = true;
+    }
+
+    @Override
+    public void paint(Graphics graphics) {
+        this.calcularBordes();
+        this.addProductos();
+        super.paint(graphics);
+
+        int y = 0;
+        for (int i = 0; i < TipoProductos.values().length; i++) {
+            final int productoHeight = (int) (this.sizeDeposito.height * 0.8);
 
             // Soporte dispensador
             final Rectangle bordesSoporte = new Rectangle(this.sizeSoporte);

@@ -31,7 +31,7 @@ public class BotonNumpad extends JButton implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         this.panelPopupNumpad.setTipoSeleccionado(this.tipo);
-        this.panelProductoPreview.setImagenPreview(ImagenRecurso.getImagenProducto(this.tipo));
+        this.panelProductoPreview.setImagenPreview(ImagenRecurso.getImagenProducto(this.tipo).getImagen());
         this.panelProductoPreview.repaint();
     }
 }

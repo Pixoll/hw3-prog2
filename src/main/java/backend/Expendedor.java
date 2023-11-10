@@ -1,7 +1,6 @@
 package backend;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Máquina expendedora que vende los productos.
@@ -93,11 +92,12 @@ public class Expendedor {
     }
 
     /**
-     * Entrega la cantidad de productos del tipo especificado.
-     * @return La cantidad de productos del tipo especificado.
+     * Devuelve el depósito de productos correspondiente al tipo.
+     * @param tipo El tipo de producto.
+     * @return El depósito de productos correspondiente.
      */
-    public int getProductoCantidad(TipoProductos tipo) {
-        return this.productos.get(tipo.ordinal()).size();
+    public Deposito<Producto> getDepositoProducto(TipoProductos tipo) {
+        return this.productos.get(tipo.ordinal());
     }
 
     /**

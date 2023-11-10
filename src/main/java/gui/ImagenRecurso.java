@@ -32,14 +32,15 @@ public enum ImagenRecurso {
     ERROR("/images/error.png"),
     FLECHA_ARRIBA("/images/arrow.png");
 
-    private final URL path;
-    private Image imagen;
+    private final ImageIcon icon;
+    private final Image imagen;
     private TipoProductos tipoProducto;
     private Moneda moneda;
 
     ImagenRecurso(String path) {
-        this.path = Objects.requireNonNull(ImagenRecurso.class.getResource(path));
-        this.imagen = new ImageIcon(this.path).getImage();
+        final URL imagenPath = Objects.requireNonNull(ImagenRecurso.class.getResource(path));
+        this.icon = new ImageIcon(imagenPath);
+        this.imagen = icon.getImage();
         this.tipoProducto = null;
         this.moneda = null;
     }
@@ -54,11 +55,10 @@ public enum ImagenRecurso {
         this.moneda = moneda;
     }
 
-    public static Image getImagenProducto(TipoProductos tipo) {
-        if (tipo == null) return ImagenRecurso.ERROR.getImagen();
+    public static ImagenRecurso getImagenProducto(TipoProductos tipo) {
+        if (tipo == null) return ImagenRecurso.ERROR;
         return Arrays.stream(ImagenRecurso.values())
                 .filter(imagenRecurso -> imagenRecurso.tipoProducto == tipo)
-                .map(ImagenRecurso::getImagen)
                 .findFirst()
                 .orElse(null);
     }
@@ -73,7 +73,23 @@ public enum ImagenRecurso {
                 .orElse(null);
     }
 
+    public ImageIcon getIcon() {
+        return this.icon;
+    }
+
     public Image getImagen() {
         return this.imagen;
+    }
+
+    public int getHeight() {
+        return this.imagen.getHeight(null);
+    }
+
+    public int getWidth() {
+        return this.imagen.getWidth(null);
+    }
+
+    public Image getResized(int width, int height) {
+        return this.imagen.getScaledInstance(width, height, Image.SCALE_DEFAULT);
     }
 }

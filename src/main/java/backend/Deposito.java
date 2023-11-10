@@ -38,6 +38,15 @@ public class Deposito<T> {
     }
 
     /**
+     * Lee el item en el index sin removerlo del depósito.
+     * @param index El index a leer.
+     * @return El item en el index correspondiente.
+     */
+    public T leer(int index) {
+        return this.items.get(index);
+    }
+
+    /**
      * Remueve el primer item almacenado. Si puedeRemover falso, no elimina nada y devuelve null.
      * @return El item. null si está vacío o si puedeRemover es falso.
      */
