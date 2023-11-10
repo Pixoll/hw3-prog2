@@ -7,11 +7,30 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Es un botón del numpad.
+ */
 public class BotonNumpad extends JButton implements ActionListener {
+    /**
+     * Es el Numpad para seleccionar el producto.
+     */
     private final PanelPopupNumpad panelPopupNumpad;
+    /**
+     * Es el panel donde se ve el producto seleccionado.
+     */
     private final PanelExpendedorProductoPreview panelProductoPreview;
+    /**
+     * Es el tipo del producto correspondiente al botón.
+     */
     private final TipoProductos tipo;
 
+    /**
+     * Es un botón del numpad.
+     *
+     * @param tipo                 Tipo del producto correspondiente al botón.
+     * @param panelPopupNumpad     Numpad para seleccionar el producto.
+     * @param panelProductoPreview Panel donde se ve el producto seleccionado.
+     */
     public BotonNumpad(TipoProductos tipo, PanelPopupNumpad panelPopupNumpad, PanelExpendedorProductoPreview panelProductoPreview) {
         super();
 

@@ -6,6 +6,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.function.Function;
 
+/**
+ * Permite crear botones en la máquina expendedora que tienen popups relacionados
+ */
 public class PanelExpendedorSeleccionable extends JPanel implements MouseListener {
     protected final PanelComprador panelComprador;
     protected final PanelExpendedor panelExpendedor;

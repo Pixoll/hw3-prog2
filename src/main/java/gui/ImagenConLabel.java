@@ -3,10 +3,23 @@ package gui;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Es un panel con imagen de fondo y texto.
+ */
 public class ImagenConLabel extends JLabel {
+    /**
+     * Es la imagen del panel.
+     */
     private final ImagenRecurso imagenRecurso;
+    /**
+     * Es el panel del texto que tiene la imagen.
+     */
     private final JLabel texto;
 
+    /**
+     * Es un panel con imagen de fondo y texto.
+     * @param imagenRecurso La imagen del panel.
+     */
     public ImagenConLabel(ImagenRecurso imagenRecurso) {
         super(imagenRecurso.getIcon(), SwingConstants.CENTER);
 
@@ -16,6 +29,22 @@ public class ImagenConLabel extends JLabel {
         this.texto = new JLabel();
         this.texto.setOpaque(true);
         this.add(this.texto);
+    }
+
+    /**
+     * Da la imagen del panel.
+     * @return La imagen del panel.
+     */
+    public ImagenRecurso getImagenRecurso() {
+        return this.imagenRecurso;
+    }
+
+    /**
+     * Da el texto de la imagen.
+     * @return El texto de la imagen.
+     */
+    public String getTexto() {
+        return this.texto.getText();
     }
 
     @Override

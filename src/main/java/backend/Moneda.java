@@ -4,21 +4,25 @@ package backend;
  * El comprador la usa en el expendedor para obtener un producto.
  */
 public abstract class Moneda implements Comparable<Moneda> {
+    private static int CANTIDAD = 0;
     private final int valor;
+    private final int serie;
 
     /**
      * El comprador la usa en el expendedor para obtener un producto.
      */
     public Moneda(int valor) {
         this.valor = valor;
+        this.serie = CANTIDAD;
+        CANTIDAD++;
     }
 
     /**
      * Serie única para cada moneda creada.
      * @return Serie de la moneda.
      */
-    public String getSerie() {
-        return Integer.toString(this.hashCode(), 16);
+    public int getSerie() {
+        return this.serie;
     }
 
     /**

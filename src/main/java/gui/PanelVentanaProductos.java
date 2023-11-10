@@ -16,6 +16,7 @@ public class PanelVentanaProductos extends JPanel {
     private final Dimension sizeSoporte;
     private final ArrayList<PanelTexto> preciosProductos;
     private final ArrayList<ImagenConLabel> imagenesProductos;
+    private ImagenConLabel imagenProductoComprado;
     private boolean bordesCalculados;
     private boolean addedProductos;
     private boolean productosActualizados;
@@ -30,6 +31,7 @@ public class PanelVentanaProductos extends JPanel {
         this.bordesCalculados = false;
         this.addedProductos = false;
         this.productosActualizados = true;
+        this.imagenProductoComprado = null;
 
         this.setLayout(null);
         this.setBackground(Util.color("#ffffff"));
@@ -45,12 +47,27 @@ public class PanelVentanaProductos extends JPanel {
 
     public void actualizarProductos() {
         this.productosActualizados = false;
-        final int cantidad = this.imagenesProductos.size();
-        for (int i = cantidad - 1; i >= 0; i--) {
-            final ImagenConLabel imagenProducto = this.imagenesProductos.get(i);
-            this.remove(imagenProducto);
-            this.imagenesProductos.remove(imagenProducto);
+    }
+
+    public ImagenConLabel getImagenProductoComprado(TipoProductos tipo, int serie) {
+        final ImagenRecurso imagenRecursoProducto = ImagenRecurso.getImagenProducto(tipo);
+        if (this.imagenProductoComprado != null
+                && this.imagenProductoComprado.getImagenRecurso() == imagenRecursoProducto
+                && this.imagenProductoComprado.getTexto().equals(Integer.toString(serie))
+        ) {
+            return this.imagenProductoComprado;
         }
+
+        for (ImagenConLabel imagenProducto : this.imagenesProductos) {
+            if (imagenProducto.getImagenRecurso() == imagenRecursoProducto
+                    && imagenProducto.getTexto().equals(Integer.toString(serie))
+            ) {
+                this.imagenProductoComprado = imagenProducto;
+                break;
+            }
+        }
+
+        return this.imagenProductoComprado;
     }
 
     private void calcularBordes() {
@@ -89,6 +106,15 @@ public class PanelVentanaProductos extends JPanel {
 
     private void addProductos() {
         if (this.addedProductos && this.productosActualizados) return;
+
+        if (!this.productosActualizados) {
+            final int cantidad = this.imagenesProductos.size();
+            for (int i = cantidad - 1; i >= 0; i--) {
+                final ImagenConLabel imagenProducto = this.imagenesProductos.get(i);
+                this.remove(imagenProducto);
+                this.imagenesProductos.remove(imagenProducto);
+            }
+        }
 
         int y = 0;
         for (TipoProductos tipo : TipoProductos.values()) {

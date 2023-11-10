@@ -3,13 +3,37 @@ package gui;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Es toda la GUI.
+ */
 public class PanelPrincipal extends JPanel {
+    /**
+     * Panel del Comprador que se encuentra a la izquierda del GUI.
+     */
     private final PanelComprador panelComprador;
+
+    /**
+     * Panel Máquina expendedora que se encuentra a la derecha de la GUI.
+     */
     private final PanelExpendedor panelExpendedor;
+    /**
+     * Es imagen del fondo GUI.
+     */
     private final Image imagenFondo;
+    /**
+     * Son los bordes del fondo.
+     */
     private final Rectangle bordesFondo;
+    /**
+     * Prohíbe que se calculen los bordes más de una vez.
+     */
     private boolean bordesCalculados;
 
+    /**
+     * Es toda la GUI.
+     * @param width ancho del panel principal.
+     * @param height alto del panel principal.
+     */
     public PanelPrincipal(int width, int height) {
         this.setLayout(null);
         this.setBounds(0, 0, width, height);
@@ -42,14 +66,25 @@ public class PanelPrincipal extends JPanel {
         this.bordesCalculados = false;
     }
 
+    /**
+     * Da el panel del comprador.
+     * @return El panel del comprador.
+     */
     public PanelComprador getPanelComprador() {
         return this.panelComprador;
     }
 
+    /**
+     * Da el panel del expendedor.
+     * @return El panel del expendedor.
+     */
     public PanelExpendedor getPanelExpendedor() {
         return this.panelExpendedor;
     }
 
+    /**
+     * Calcula los bordes.
+     */
     private void calcularBordes() {
         if (this.bordesCalculados) return;
 
@@ -60,6 +95,10 @@ public class PanelPrincipal extends JPanel {
         this.bordesCalculados = true;
     }
 
+    /**
+     * Da los bordes del fondo.
+     * @return Los bordes del fondo.
+     */
     public Rectangle getBordesFondo() {
         return this.bordesFondo;
     }
