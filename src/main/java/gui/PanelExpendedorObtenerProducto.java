@@ -33,9 +33,10 @@ public class PanelExpendedorObtenerProducto extends JPanel implements MouseListe
 
     /**
      * Es el panel donde aparece el producto obtenido.
-     * @param panelExpendedor Panel Máquina expendedora que se encuentra a la derecha de la GUI.
-     * @param imagenPanel
-     * @param imagenPanelBorde
+     *
+     * @param panelExpendedor  Panel Máquina expendedora que se encuentra a la derecha de la GUI.
+     * @param imagenPanel      Es la imagen del panel.
+     * @param imagenPanelBorde Es la imagen con los bordes del panel.
      */
     public PanelExpendedorObtenerProducto(PanelExpendedor panelExpendedor, ImagenRecurso imagenPanel, ImagenRecurso imagenPanelBorde) {
         this.panelExpendedor = panelExpendedor;
